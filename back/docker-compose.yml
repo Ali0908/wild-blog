@@ -1,0 +1,20 @@
+version: '3'
+services:
+  spring-boot-app:
+    image: 'back-0.0.1-SNAPSHOT:latest'  # Replace with the name of your Spring Boot image
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_DB=wildblogdatabase
+      - POSTGRES_PASSWORD=@h9?3T6muS
+      - POSTGRES_USER=wildadmin
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:
