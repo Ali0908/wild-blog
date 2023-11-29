@@ -1,75 +1,49 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component} from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup, AbstractControl, FormBuilder, ValidationErrors } from '@angular/forms';
-
-
+import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
 @Component({
   selector: 'app-authentification',
-  standalone: true,
-  imports: [MatIconModule, MatFormFieldModule, MatInputModule,CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './authentification.component.html',
-  styleUrl: './authentification.component.css'
+  styleUrls: ['./authentification.component.css'],
+  standalone: true,
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatIconModule],
 })
 export class AuthentificationComponent {
-  form: FormGroup<{ email: FormControl<string | null>; password: FormControl<string | null>; confirmPassword: FormControl<string | null>; }>;
-  constructor(private fb: FormBuilder) {
-    this.form = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, this.passwordStrengthValidator]),
-      confirmPassword: new FormControl('', [Validators.required, this.confirmPasswordValidator])
-    });
-  }
   hide = true;
+  form = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required,Validators.minLength(10), Validators.pattern(/^(?=.*[A-Z]).*(?=.*[a-z]).*(?=.*[!@#$%^&*()_+\-=\[\]{};',.:\/?]).{10,}$/)]),
+    confirmPassword: new FormControl('', [Validators.required, confirmPasswordValidator]),
+  });
 
-
-  getErrorMessage(control: AbstractControl): string {
-    if (control.hasError('required')) {
-      return 'Merci de saisir une valeur.';
+  getErrorEmail() {
+    if (this.form.controls.email.hasError('required')) {
+      return 'Merci de saisir une adresse mail';
     }
 
-    if (control.hasError('email')) {
-      return 'L\'adresse email saisie n\'est pas valide.';
-    }
-
-    if (control.hasError('strength')) {
-      return 'Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial.';
-    }
-
-    if (control.hasError('match')) {
-      return 'Le mot de passe confirmé ne correspond pas au mot de passe saisi.';
-    }
-
-    return '';
+    return this.form.controls.email.hasError('email') ? 'Merci de saisir une adresse mail sous un format valide' : '';
   }
-  passwordStrengthValidator(control: FormControl): { [key: string]: boolean } | null {
-    const value = control.value;
-    if (!value) {
-      return null;
-    }
-
-    const hasUpperCase = /[A-Z]/.test(value);
-    const hasLowerCase = /[a-z]/.test(value);
-    const hasSpecialCharacter = /[!@#$%^&*()_+\-=\[\]{};:'",.<>/?]/.test(value);
-    const isLongEnough = value.length >= 10;
-
-    if (!hasUpperCase || !hasLowerCase || !hasSpecialCharacter || !isLongEnough) {
-      return { strength: true };
-    }
-
-    return null;
+  getErrorPassword() {
+    if (this.form.controls.password.hasError('required')) {
+      return 'Merci de saisir un mot de passe';
+    } else if (this.form.controls.password.hasError('minlength') || this.form.controls.password.hasError('pattern')) {
+    return  'Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial';
   }
-  confirmPasswordValidator(control: FormControl): ValidationErrors | null {
-    if (!control.value) {
-      return null;
-    }
-  if (control.value){
-    if (control.value !== this.form.controls.password.value) {
-      return { confirmPassword: true };
-    }
+  return '';
+}
+getErrorConfirmPassword() {
+  if (!this.form.controls.confirmPassword) {
+    return 'Merci de saisir un mot de passe une nouvelle fois';
   }
-    return null;
-  }
+  //  else if (this.form.controls.confirmPassword.hasError('confirmPasswordValidator')) {
+  //   return 'Les mots de passe ne correspondent pas';
+  // }
+  return '';
+}
+
 }

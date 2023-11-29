@@ -1,48 +1,23 @@
-<div class="authentification-container">
-    <div class="login-form"></div>
-    <div class="signup-form">
-        <mat-form-field hintLabel="Max 10 characters">
-            <mat-label>Saisissez un nom d'utilisateur</mat-label>
-            <input matInput #input maxlength="20" placeholder="Ex. PaulB">
-            <mat-hint align="end">{{input.value.length}}/20</mat-hint>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Saisissez un email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="form.controls.email" required>
-            @if (form.controls.email.hasError('required')) {
-            <mat-error>Merci de saisir un email valide.</mat-error>
-            }
-            @if (form.controls.email.hasError('email')) {
-            <mat-error>Le format de l'email est invalide.</mat-error>
-            }
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Saisissez un mot de passe</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'"[formControl]="form.controls.password" required>
-            @if (form.controls.password.hasError('required')) {
-                <mat-error>Merci de saisir un mot de passe..</mat-error>
-                }
-            @if (form.controls.password.hasError('password')) {
-                <mat-error>Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial.</mat-error>
-                }
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Confirmer votre mot de passe</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'"[formControl]="form.controls.confirmPassword" required>
-            @if (form.controls.confirmPassword.hasError('required')) {
-                <mat-error>Merci de saisir un mot de passe..</mat-error>
-                }
-            @if (form.controls.confirmPassword.hasError('match')) {
-                <mat-error>Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial.</mat-error>
-                }
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <!-- <button mat-button [disabled]="!form.valid"></button> -->
-        <button mat-raised-button color="primary">Valider</button>
-    </div>
+<div class="signup-form">
+    <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="pat@example.com" [formControl]="form.controls.email" required>
+      <mat-error *ngIf="form.controls.email.invalid">{{getErrorEmail()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="form.controls.password" required>
+        <mat-error *ngIf="form.controls.password.invalid">{{getErrorPassword()}}</mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label> Confirmation du mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [formControl]="form.controls.confirmPassword" required>
+        <mat-error *ngIf="form.controls.confirmPassword.invalid">{{getErrorConfirmPassword()}}</mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
 </div>

@@ -1,14 +1,7 @@
-.nav-container{
+.authentification-container{
     display: flex;
     justify-content: space-between;
-}
-.title{
-    color: #fff;
-}
-.btn-header{
-    color: #fff;
-    background-color: red;
-    border-radius: 5px;
-    height: 20%;
-    margin-top: 2%;
+    .authentification-title{
+        color: #fff;
+    }
 }
