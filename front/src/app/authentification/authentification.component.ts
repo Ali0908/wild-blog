@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component} from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
+// import { confirmPasswordValidator } from './confirmPasswordValidator.directive';
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
@@ -18,7 +18,7 @@ export class AuthentificationComponent {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required,Validators.minLength(10), Validators.pattern(/^(?=.*[A-Z]).*(?=.*[a-z]).*(?=.*[!@#$%^&*()_+\-=\[\]{};',.:\/?]).{10,}$/)]),
-    confirmPassword: new FormControl('', [Validators.required, confirmPasswordValidator]),
+    confirmPassword: new FormControl('', [Validators.required]),
   });
 
   getErrorEmail() {
@@ -37,13 +37,14 @@ export class AuthentificationComponent {
   return '';
 }
 getErrorConfirmPassword() {
-  if (!this.form.controls.confirmPassword) {
-    return 'Merci de saisir un mot de passe une nouvelle fois';
-  }
-  //  else if (this.form.controls.confirmPassword.hasError('confirmPasswordValidator')) {
+  const password = this.form.controls.password.value;
+  const confirmPassword = this.form.controls.confirmPassword.value;
+  console.log('Mot de passe', password);
+  console.log('Confirmation du mot de passe', confirmPassword);
+  // if (this.form.controls.confirmPassword.hasError('confirmPasswordValidator')) {
+  //   this.form.controls.confirmPassword.setErrors({'passwordmatcherror': true});
   //   return 'Les mots de passe ne correspondent pas';
   // }
   return '';
 }
-
 }
