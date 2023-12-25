@@ -6,20 +6,18 @@ services:
     volumes:
       - ./back/src:/app/src
     depends_on:
-      - db
-  db:
-    image: 'postgres:latest'
+      - dbpg
+  dbpg:
+    image: 'postgrest'
     restart: always
     environment:
-      - POSTGRES_DB=wildblogdatabase
-      - POSTGRES_PASSWORD=@h9?3T6muS
-      - POSTGRES_USER=wildadmin
-    ports:
-      - '5432:5432'
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
   front:
     build: /front
     ports:
       - '4200:4200'
     volumes:
       - /front/src:/app/front
+
 

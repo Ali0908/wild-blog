@@ -1,20 +1,16 @@
-# Utiliser l'image officielle de Node.js 18
 FROM node:18.13 as builder
-
-# Définir le répertoire de travail dans l'image
-WORKDIR /src
-
 # Copier les fichiers nécessaires pour installer les dépendances
 COPY /package.json /package.json
 COPY /package-lock.json /package-lock.json
 
 # Installer les dépendances
 RUN npm install
+
 # Copier le reste des fichiers de l'application
 COPY . .
 
 # Construire l'application Angular en mode production
-RUN npm run build 
+RUN npm run build
 
 # Utiliser une image légère pour exécuter l'application construite
 FROM nginx:latest

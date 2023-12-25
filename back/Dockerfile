@@ -1,11 +1,9 @@
-# Utiliser l'image adoptopenjdk avec Java 17
-FROM  eclipse-temurin:17
-
+FROM adoptopenjdk:latest
 # Définir le répertoire de travail dans l'image
 WORKDIR /src
 
 # Copier le JAR construit dans le répertoire de travail
-COPY /target/back.jar /src/back.jar
+COPY /target/back-0.0.1-SNAPSHOT.jar /src/back.jar
 
 # Exposer le port 8080
 EXPOSE 8080
