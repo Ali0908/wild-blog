@@ -10,9 +10,12 @@ services:
   db:
     image: 'postgres:latest'
     restart: always
+    ports:
+      - '15432:5432'
     environment:
-      POSTGRES_USER: "user"
-      POSTGRES_PASSWORD: "a"
+      - 'POSTGRES_USER=user'
+      - 'POSTGRES_DB=wildblog'
+      - 'POSTGRES_PASSWORD=a'
   adminer:
     image: adminer
     restart: always
@@ -24,5 +27,3 @@ services:
       - '4200:4200'
     volumes:
       - /front/src:/app/front
-
-
