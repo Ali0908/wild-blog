@@ -1,4 +1,4 @@
-FROM adoptopenjdk:latest
+FROM eclipse-temurin:17
 # Définir le répertoire de travail dans l'image
 WORKDIR /src
 

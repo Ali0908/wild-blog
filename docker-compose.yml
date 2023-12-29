@@ -2,7 +2,7 @@ services:
   backend:
     build: /back
     ports:
-      - '8081:8081'
+      - '8080:8080'
     volumes:
       - ./back/src:/app/src
     depends_on:
@@ -16,11 +16,6 @@ services:
       - 'POSTGRES_USER=user'
       - 'POSTGRES_DB=wildblog'
       - 'POSTGRES_PASSWORD=a'
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - '8080:8080'
   front:
     build: /front
     ports:
