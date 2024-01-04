@@ -1,0 +1,19 @@
+## Register a new user
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "user": "sabron",
+    "email": "sabrina@test.com",
+    "password": "maChérie"
+}
+
+###
+## Login
+POST http://localhost:8080/api/v1/auth/authenticate
+Content-Type: application/json
+
+{
+    "email": "",
+    "password": ""
+}
