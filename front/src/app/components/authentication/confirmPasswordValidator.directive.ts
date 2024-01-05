@@ -5,7 +5,7 @@ export const confirmPasswordValidator: ValidatorFn = (control: AbstractControl):
 
   return password && confirmPassword
   && password.value === confirmPassword.value
-  ? { confirmPassword: true }
-  : { confirmPassword: false };
+    ? { confirmPassword: true }
+    : { confirmPassword: false };
 }
 

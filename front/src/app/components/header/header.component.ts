@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthentificationComponent } from '../authentification/authentification.component';
+import { AuthenticationComponent } from '../authentication/authentication.component';
 import { MatDialog } from '@angular/material/dialog';
 
 
@@ -13,7 +13,7 @@ export class HeaderComponent {
 
   constructor(public dialog: MatDialog) { }
   openDialog() {
-    const dialogRef = this.dialog.open(AuthentificationComponent);
+    const dialogRef = this.dialog.open(AuthenticationComponent);
 
     dialogRef.afterClosed().subscribe();
   }
