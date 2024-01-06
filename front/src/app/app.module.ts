@@ -6,11 +6,13 @@ import { HeaderComponent } from './components/header/header.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AuthenticationComponent } from './components/authentication/authentication.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
