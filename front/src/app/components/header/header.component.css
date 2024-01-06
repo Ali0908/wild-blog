@@ -1,7 +1,7 @@
-.authentification-container{
-    display: flex;
-    justify-content: space-between;
-    .authentification-title{
-        color: #fff;
-    }
+.authentication-container {
+  display: flex;
+  justify-content: space-between;
+  .authentication-title{
+    color: white;
+  }
 }
