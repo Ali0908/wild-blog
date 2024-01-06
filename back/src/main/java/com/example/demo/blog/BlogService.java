@@ -1,14 +1,23 @@
 package com.example.demo.blog;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public class BlogService {
+
+    private final BlogRepository blogRepository;
+    @Autowired
+    public BlogService(BlogRepository blogRepository) {
+        this.blogRepository = blogRepository;
+    }
     public Blog create(Blog blog) {
-        return null;
+        return blogRepository.save(blog);
     }
 
     public List<Blog> getAllBlogs() {
-        return null;
+        return blogRepository.findAll();
     }
 
     public Blog updateBlog(Integer id, Blog updatedBlog) {
@@ -16,5 +25,6 @@ public class BlogService {
     }
 
     public void deleteUser(Integer id) {
+        blogRepository.deleteById(id);
     }
 }
