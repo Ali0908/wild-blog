@@ -1,8 +1,7 @@
 package com.example.demo.blog;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.example.demo.category.Category;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Setter
@@ -17,5 +16,11 @@ public class Blog {
     @GeneratedValue
     private Integer id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
+    public Integer getCategoryId() {
+        return category.getId();
+    }
 }

@@ -26,7 +26,8 @@ public class SecurityConfiguration {
     private final LogoutHandler logoutHandler;
     private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**",
             "/api/v1/blog",
-          };
+            "/api/v1/category",
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

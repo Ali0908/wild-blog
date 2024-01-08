@@ -1,6 +1,7 @@
 package com.example.demo.blog;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +15,10 @@ public class BlogController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public Blog create(Blog blog) {
-        return blogService.create(blog);
+    public ResponseEntity<?> create(
+            @RequestBody BlogRequest blog) {
+        blogService.create(blog);
+        return ResponseEntity.accepted().build();
     }
     @GetMapping
     public List<Blog> getAllBlogs() {

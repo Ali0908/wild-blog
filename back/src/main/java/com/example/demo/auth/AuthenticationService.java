@@ -4,6 +4,7 @@ import com.example.demo.config.JwtService;
 import com.example.demo.token.Token;
 import com.example.demo.token.TokenRepository;
 import com.example.demo.token.TokenType;
+import com.example.demo.user.Role;
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +33,7 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(Role.USER)
                 .build();
         var savedUser = repository.save(user);
         var jwtToken = jwtService.generateToken(user);

@@ -2,6 +2,10 @@ package com.example.demo;
 
 import com.example.demo.auth.AuthenticationService;
 import com.example.demo.auth.RegisterRequest;
+import com.example.demo.blog.BlogRequest;
+import com.example.demo.blog.BlogService;
+import com.example.demo.category.CategoryRequest;
+import com.example.demo.category.CategoryService;
 import com.example.demo.user.Role;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +21,9 @@ public class DemoApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(
-			AuthenticationService service
+			AuthenticationService service,
+			CategoryService categoryService,
+			BlogService blogService
 	) {
 		return args -> {
 			var admin = RegisterRequest.builder()
@@ -34,6 +40,17 @@ public class DemoApplication {
 					.build();
 			System.out.println("User token: " + service.register(user).getAccessToken());
 
+			var category = CategoryRequest.builder()
+					.name("Food")
+					.build();
+			categoryService.create(category);
+
+
+			var blog = BlogRequest.builder()
+					.name("Pasta")
+					.categoryId(1)
+					.build();
+			blogService.create(blog);
 		};
 	}
 
