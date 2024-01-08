@@ -19,8 +19,4 @@ public class Blog {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
-    public Integer getCategoryId() {
-        return category.getId();
-    }
 }

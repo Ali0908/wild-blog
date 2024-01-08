@@ -10,11 +10,9 @@ import java.util.List;
 public class BlogService {
 
     private final BlogRepository blogRepository;
-    private final CategoryService categoryService;
     @Autowired
-    public BlogService(BlogRepository blogRepository, CategoryService categoryService) {
+    public BlogService(BlogRepository blogRepository) {
         this.blogRepository = blogRepository;
-        this.categoryService = categoryService;
     }
     public List<Blog> getAllBlogs() {
         return blogRepository.findAll();
