@@ -12,6 +12,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogController {
     private final BlogService blogService;
+    @GetMapping
+    public List<Blog> getAllBlogs() {
+        return blogService.getAllBlogs();
+    }
 
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
@@ -19,10 +23,6 @@ public class BlogController {
             @RequestBody BlogRequest blog) {
         blogService.create(blog);
         return ResponseEntity.accepted().build();
-    }
-    @GetMapping
-    public List<Blog> getAllBlogs() {
-        return blogService.getAllBlogs();
     }
     @PutMapping("/{id}")
     public Blog updateBlog(@PathVariable Integer id, @RequestBody Blog updatedBlog) {

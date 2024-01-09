@@ -24,4 +24,8 @@ export class HeaderComponent {
 
     dialogRef.afterClosed().subscribe();
   }
+
+  openBlogForm() {
+
+  }
 }

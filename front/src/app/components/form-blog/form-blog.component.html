@@ -1,0 +1,20 @@
+<div>
+  <form  class="form-blog-container" [formGroup]="formBlog" (ngSubmit)="OnCreateBlog()">
+<mat-form-field>
+  <mat-label>Titre du blog</mat-label>
+  <input matInput formControlName="blogTitle" required>
+  <mat-error *ngIf="formBlog.get('blogTitle')?.hasError('required')">Merci un titre pour votre blog</mat-error>
+  <mat-error *ngIf="formBlog.get('blogTitle')?.hasError('minlength') || formBlog.get('blogTitle')?.hasError('maxlength')"> Le titre doit contenir entre 3 et 10 caratères</mat-error>
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Catégories</mat-label>
+  <mat-select formControlName="categories">
+    <mat-option value="one">Tech</mat-option>
+    <mat-option value="two">Nourriture</mat-option>
+    <mat-option value="two">Sport</mat-option>
+    <mat-option value="two">Politique</mat-option>
+  </mat-select>
+</mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Valider</button>
+  </form>
+</div>

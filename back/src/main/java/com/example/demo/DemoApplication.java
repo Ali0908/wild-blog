@@ -21,9 +21,7 @@ public class DemoApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(
-			AuthenticationService service,
-			CategoryService categoryService,
-			BlogService blogService
+			AuthenticationService service
 	) {
 		return args -> {
 			var admin = RegisterRequest.builder()
@@ -40,17 +38,6 @@ public class DemoApplication {
 					.build();
 			System.out.println("User token: " + service.register(user).getAccessToken());
 
-			var category = CategoryRequest.builder()
-					.name("Food")
-					.build();
-			categoryService.create(category);
-
-
-			var blog = BlogRequest.builder()
-					.name("Pasta")
-					.categoryId(1)
-					.build();
-			blogService.create(blog);
 		};
 	}
 
