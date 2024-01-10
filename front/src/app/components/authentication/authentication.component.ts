@@ -72,6 +72,7 @@ export class AuthenticationComponent {
       .pipe(
         tap(response => {
           this.authResponse = response;
+             localStorage.setItem('token', response.access_token as string );
           console.log('User connected successfully!', response);
           window.alert('Utilisateur connecté');
           this.dialogRef.close();
