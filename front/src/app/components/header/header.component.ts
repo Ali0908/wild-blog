@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationComponent } from '../authentication/authentication.component';
 import { MatDialog } from '@angular/material/dialog';
-import {LoginComponent} from "../login/login.component";
 
 
 
@@ -13,19 +12,9 @@ import {LoginComponent} from "../login/login.component";
 export class HeaderComponent {
 
   constructor(public dialog: MatDialog) { }
-  openLoginDialog() {
-    const dialogRef = this.dialog.open(LoginComponent);
-
-    dialogRef.afterClosed().subscribe();
-  }
-
-  openRegisterDialog() {
+  openAuthenticationDialog() {
     const dialogRef = this.dialog.open(AuthenticationComponent);
 
     dialogRef.afterClosed().subscribe();
-  }
-
-  openBlogForm() {
-
   }
 }
