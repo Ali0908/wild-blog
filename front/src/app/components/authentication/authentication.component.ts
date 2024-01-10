@@ -14,7 +14,7 @@ import {RouterLink} from "@angular/router";
 import {AuthenticationRequest} from "../../models/authentication-request";
 import {AuthenticationResponse} from "../../models/authentication-response";
 import {MatDialogRef} from "@angular/material/dialog";
-import {Location} from "@angular/common";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -24,7 +24,7 @@ import {Location} from "@angular/common";
 })
 export class AuthenticationComponent {
   constructor( private authenticationService: AuthenticationService, private dialogRef: MatDialogRef<AuthenticationComponent>
-    , private location: Location) {
+    , private router: Router) {
   }
   authRequest: AuthenticationRequest = {};
   authResponse: AuthenticationResponse = {};
@@ -75,7 +75,8 @@ export class AuthenticationComponent {
           console.log('User connected successfully!', response);
           window.alert('Utilisateur connecté');
           this.dialogRef.close();
-          this.goBack();
+          this.router.navigate(['dashboard']);
+          location.reload();
         }),
         catchError(async (error) => {
           console.error('Error connected user', error);
@@ -88,9 +89,5 @@ export class AuthenticationComponent {
   handleFomRenderer() {
     this.register = true;
     this.login = false;
-  }
-
-  private goBack() {
-    this.location.back();
   }
 }
