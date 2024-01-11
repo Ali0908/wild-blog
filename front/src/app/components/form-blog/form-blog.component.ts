@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { BlogService } from '../../services/blog/blog.service';
 import {catchError, tap} from "rxjs";
+import {BlogRequest} from "../../models/blog-request";
 
 @Component({
   selector: 'app-form-blog',
@@ -17,11 +18,15 @@ export class FormBlogComponent {
   })
 
   OnCreateBlog() {
-    const blog = {
-      blogTitle: this.formBlog.value.blogTitle,
+    const token = localStorage.getItem('token');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    const blog: BlogRequest  = {
+      title: this.formBlog.value.blogTitle,
       categories: this.formBlog.value.categories,
     }
-    this.BlogService.createBlog(blog)
+    this.BlogService.createBlog(blog, headers)
       .pipe(
         tap(response => {
           console.log('Blog créé', response);

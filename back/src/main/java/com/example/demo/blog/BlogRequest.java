@@ -9,6 +9,6 @@ import lombok.Setter;
 @Builder
 public class BlogRequest {
     private Integer id;
-    private String name;
+    private String title;
     private Integer categoryId;
 }

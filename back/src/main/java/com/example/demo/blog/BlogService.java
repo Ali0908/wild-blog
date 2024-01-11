@@ -31,7 +31,7 @@ public class BlogService {
     public void create(BlogRequest request) {
         var blog = Blog.builder()
                 .id(request.getId())
-                .name(request.getName())
+                .title(request.getTitle())
                 .build();
         blogRepository.save(blog);
     }

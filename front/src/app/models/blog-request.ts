@@ -1,4 +1,5 @@
-export interface BlogRequest{
-    blogTitle?: string | null;
-    categories?: string | null;
+export interface BlogRequest {
+  title?: string | null;
+  categories?: string | null;
+  access_token?: string| null;
 }

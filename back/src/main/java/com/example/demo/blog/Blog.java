@@ -15,7 +15,7 @@ public class Blog {
     @Id
     @GeneratedValue
     private Integer id;
-    private String name;
+    private String title;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
