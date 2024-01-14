@@ -10,5 +10,5 @@ import lombok.Setter;
 public class BlogRequest {
     private Integer id;
     private String title;
-    private Integer categoryId;
+    Integer categoryId;
 }

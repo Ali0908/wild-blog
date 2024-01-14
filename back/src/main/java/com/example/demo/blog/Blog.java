@@ -13,7 +13,7 @@ import lombok.*;
 @Entity
 public class Blog {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
 

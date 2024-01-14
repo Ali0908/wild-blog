@@ -6,8 +6,8 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Setter
-@Getter
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,6 +18,7 @@ public class Category {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Blog> blogs = new ArrayList<Blog>();
+
+    @OneToMany(mappedBy = "category")
+    private List<Blog> blogs;
 }

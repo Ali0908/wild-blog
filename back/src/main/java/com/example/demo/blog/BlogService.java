@@ -1,5 +1,4 @@
 package com.example.demo.blog;
-import com.example.demo.category.Category;
 import com.example.demo.category.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class BlogService {
         var blog = Blog.builder()
                 .id(request.getId())
                 .title(request.getTitle())
-                .category(categoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new IllegalArgumentException("Category not found")))
+                .category(categoryRepository.findById(request.getCategoryId()).orElseThrow())
                 .build();
         blogRepository.save(blog);
     }
