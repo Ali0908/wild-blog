@@ -1,12 +1,10 @@
 package com.example.demo.category;
 
 import com.example.demo.blog.Blog;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @Setter
 @Getter
@@ -20,6 +18,6 @@ public class Category {
     @GeneratedValue
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "category")
-    private List<Blog> blogs;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Blog> blogs = new ArrayList<Blog>();
 }

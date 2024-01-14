@@ -17,7 +17,7 @@ public class Blog {
     private Integer id;
     private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable=false)
     private Category category;
 }
