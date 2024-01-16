@@ -1,8 +1,7 @@
 package com.example.demo.blog;
 import com.example.demo.category.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,14 +27,13 @@ public class BlogService {
         blogRepository.deleteById(id);
     }
 
-    public ResponseEntity<Object> create(BlogRequest request) {
+    public void create(BlogRequest request) {
         var blog = Blog.builder()
                 .id(request.getId())
                 .title(request.getTitle())
                 .category(categoryRepository.findById(request.getCategoryId()).orElseThrow())
                 .build();
         blogRepository.save(blog);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 

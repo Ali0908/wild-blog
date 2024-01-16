@@ -21,6 +21,6 @@ public class CategoryController {
     public ResponseEntity<?> create(
             @RequestBody CategoryRequest category) {
         categoryService.create(category);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok().build();
     }
 }

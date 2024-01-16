@@ -22,7 +22,7 @@ public class BlogController {
     public ResponseEntity<?> create(
             @RequestBody BlogRequest blog) {
         blogService.create(blog);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok().build();
     }
     @PutMapping("/{id}")
     public Blog updateBlog(@PathVariable Integer id, @RequestBody Blog updatedBlog) {
