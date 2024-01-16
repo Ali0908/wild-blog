@@ -1,0 +1,7 @@
+.authentication-container {
+  display: flex;
+  justify-content: space-between;
+  .authentication-title{
+    color: white;
+  }
+}
