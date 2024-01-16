@@ -4,7 +4,60 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00cf7b3a-b495-4227-a25f-a53baa1209fe" name="Changes" comment="merging on progress" />
+    <list default="true" id="00cf7b3a-b495-4227-a25f-a53baa1209fe" name="Changes" comment="merging on progress">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/wild-blog.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/auth/WebMvcConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/blog/Blog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/blog/BlogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/blog/BlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/blog/BlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/blog/WebMvcConfigBlog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/category/Category.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/config/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/config/LogoutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/config/SecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/demo/DemoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/token/Token.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/token/TokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/token/TokenType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/user/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/java/com/example/demo/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/src/requests.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/authentication/authentication.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/authentication/authentication.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/authentication/authentication.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/authentication/authentication.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/authentication/confirmPasswordValidator.directive.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/header/header.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/header/header.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/header/header.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/components/header/header.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/models/authentication-request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/models/authentication-response.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/models/register-request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/services/authentication/authentication.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/services/authentication/authentication.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/assets/laptop-background.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/back/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +117,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/zaaba/Projects/wild-blog",
     "node.js.detected.package.eslint": "true",
@@ -256,7 +309,7 @@
       <workItem from="1705253978349" duration="11018000" />
       <workItem from="1705344297949" duration="6226000" />
       <workItem from="1705392686396" duration="437000" />
-      <workItem from="1705397351457" duration="858000" />
+      <workItem from="1705397351457" duration="1222000" />
     </task>
     <task id="LOCAL-00001" summary="creation of User classes and interfaces">
       <option name="closed" value="true" />
@@ -554,7 +607,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705350510209</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="merging on progress">
+      <option name="closed" value="true" />
+      <created>1705398234989</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1705398234989</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
