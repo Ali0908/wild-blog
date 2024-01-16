@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00cf7b3a-b495-4227-a25f-a53baa1209fe" name="Changes" comment="but HTTP response for categories and blog" />
+    <list default="true" id="00cf7b3a-b495-4227-a25f-a53baa1209fe" name="Changes" comment="merging on progress" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +28,13 @@
 }</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -57,7 +64,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Merging main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/zaaba/Projects/wild-blog",
     "node.js.detected.package.eslint": "true",
@@ -71,7 +78,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\zaaba\\Projects\\wild-blog\\front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\zaaba\\AppData\\Local\\Programs\\IntelliJ IDEA Ultimate\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -249,6 +256,7 @@
       <workItem from="1705253978349" duration="11018000" />
       <workItem from="1705344297949" duration="6226000" />
       <workItem from="1705392686396" duration="437000" />
+      <workItem from="1705397351457" duration="858000" />
     </task>
     <task id="LOCAL-00001" summary="creation of User classes and interfaces">
       <option name="closed" value="true" />
@@ -553,7 +561,6 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added roles and began implementing jwt authentication" />
     <MESSAGE value="implement jwt + update front Dockerfile" />
     <MESSAGE value="finalize authentication with JWT and create routes for connection and registration" />
     <MESSAGE value="v1.0 JWT authentification on progress" />
@@ -578,7 +585,8 @@
     <MESSAGE value="blog form bugs" />
     <MESSAGE value="blog creation done" />
     <MESSAGE value="but HTTP response for categories and blog" />
-    <option name="LAST_COMMIT_MESSAGE" value="but HTTP response for categories and blog" />
+    <MESSAGE value="merging on progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="merging on progress" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
