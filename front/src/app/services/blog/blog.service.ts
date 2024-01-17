@@ -15,5 +15,8 @@ export class BlogService {
 
     return this.http.post(`${this.baseUrl}/create`, blogRequest, { headers });
   }
+  getAllBlogs(){
+    return this.http.get(`${this.baseUrl}`);
+  }
 
 }

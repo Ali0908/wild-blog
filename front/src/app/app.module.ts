@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -20,17 +21,18 @@ import {ReactiveFormsModule} from "@angular/forms";
     DashboardComponent,
     FormBlogComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    AuthenticationComponent,
-    AppRoutingModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        AuthenticationComponent,
+        AppRoutingModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatCardModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
