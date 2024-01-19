@@ -1,10 +1,9 @@
 package com.example.demo.category;
 
 import com.example.demo.blog.Blog;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -20,5 +19,6 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private List<Blog> blogs;
 }
