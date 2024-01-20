@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
       this.blogService.getAllBlogs().subscribe((response) => {
         this.allBlogs = response;
+        console.log(this.allBlogs);
       });
     }
 
