@@ -1,6 +1,5 @@
 package com.example.demo.comment;
 
-import com.example.demo.article.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,13 +8,11 @@ import java.util.stream.Collectors;
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final ArticleRepository articleRepository;
     private final CommentMapper commentMapper;
 
 
-    public CommentService(CommentRepository commentRepository, ArticleRepository articleRepository, CommentMapper commentMapper) {
+    public CommentService(CommentRepository commentRepository, CommentMapper commentMapper) {
         this.commentRepository = commentRepository;
-        this.articleRepository = articleRepository;
         this.commentMapper = commentMapper;
     }
     public List<CommentResponseDto> getAllArticles() {
