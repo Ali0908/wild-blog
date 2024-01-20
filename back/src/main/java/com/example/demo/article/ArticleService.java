@@ -5,36 +5,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final BlogRepository blogRepository;
 
+    private final ArticleMapper articleMapper;
+
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, BlogRepository blogRepository) {
+    public ArticleService(ArticleRepository articleRepository, BlogRepository blogRepository, ArticleMapper articleMapper) {
         this.articleRepository = articleRepository;
         this.blogRepository = blogRepository;
+        this.articleMapper = articleMapper;
     }
 
-    public List<Article> getAllArticles() {
-        return articleRepository.findAll();
+    public List<ArticleResponseDto> getAllArticles() {
+        return articleRepository.findAll()
+                .stream()
+                .map(articleMapper::toArticleResponseDto)
+                .collect(Collectors.toList());
     }
-    public void create(ArticleRequest request) {
-        var article = Article.builder()
-                .id(request.getId())
-                .title(request.getTitle())
-                .content(request.getContent())
-                .blog(blogRepository.findById(request.getBlogId()).orElseThrow())
-                .build();
+    public ArticleResponseDto create(ArticleDto articleDto) {
+        var article = articleMapper.toArticle(articleDto);
         articleRepository.save(article);
+        return articleMapper.toArticleResponseDto(article);
     }
-//    public void create(BlogRequest request) {
-//        var blog = Blog.builder()
+//    public void create(ArticleRequest request) {
+//        var article = Article.builder()
 //                .id(request.getId())
 //                .title(request.getTitle())
-//                .category(categoryRepository.findById(request.getCategoryId()).orElseThrow())
+//                .content(request.getContent())
+//                .blog(blogRepository.findById(request.getBlogId()).orElseThrow())
 //                .build();
-//        blogRepository.save(blog);
+//        articleRepository.save(article);
 //    }
 }

@@ -1,7 +1,7 @@
 package com.example.demo.article;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,13 +12,13 @@ import java.util.List;
 public class ArticleController {
     private final ArticleService articleService;
     @GetMapping
-    public List<Article> getAllArticles() {
+        public List<ArticleResponseDto> getAllArticles() {
         return articleService.getAllArticles();
     }
     @PostMapping("/create")
-    public ResponseEntity<?> create(
-            @RequestBody ArticleRequest article) {
-        articleService.create(article);
-        return ResponseEntity.ok().build();
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    public ArticleResponseDto create(
+            @RequestBody ArticleDto articleDto) {
+        return articleService.create(articleDto);
     }
 }

@@ -40,6 +40,8 @@ public class SecurityConfiguration {
                                 .permitAll()
                                 .requestMatchers("/api/v1/blog/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                                 .requestMatchers("/api/v1/category/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                .requestMatchers("/api/v1/article/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                                .requestMatchers("/api/v1/comment/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )

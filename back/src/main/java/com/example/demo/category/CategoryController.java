@@ -13,14 +13,13 @@ import java.util.List;
 public class CategoryController {
     private final CategoryService categoryService;
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<CategoryResponseDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public ResponseEntity<?> create(
-            @RequestBody CategoryRequest category) {
-        categoryService.create(category);
-        return ResponseEntity.ok().build();
+    public CategoryResponseDto create(
+            @RequestBody CategoryDto categoryDto) {
+         return  categoryService.create(categoryDto);
     }
 }
