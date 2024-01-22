@@ -11,12 +11,10 @@ import java.util.stream.Collectors;
 public class BlogService {
 
     private final BlogRepository blogRepository;
-    private final CategoryRepository categoryRepository;
     private final BlogMapper blogMapper;
     @Autowired
     public BlogService(BlogRepository blogRepository, CategoryRepository categoryRepository, BlogMapper blogMapper) {
         this.blogRepository = blogRepository;
-        this.categoryRepository = categoryRepository;
         this.blogMapper = blogMapper;
     }
     public List<BlogResponseDto> getAllBlogs() {

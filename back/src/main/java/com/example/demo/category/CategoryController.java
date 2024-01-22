@@ -18,8 +18,8 @@ public class CategoryController {
     }
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public CategoryResponseDto create(
+    public ResponseEntity<CategoryResponseDto> create(
             @RequestBody CategoryDto categoryDto) {
-         return  categoryService.create(categoryDto);
+         return  ResponseEntity.ok(categoryService.create(categoryDto));
     }
 }

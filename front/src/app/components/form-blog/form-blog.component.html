@@ -9,10 +9,7 @@
 <mat-form-field>
   <mat-label>Catégories</mat-label>
   <mat-select formControlName="categories">
-    <mat-option value="Tech">Tech</mat-option>
-    <mat-option value="Nourriture">Nourriture</mat-option>
-    <mat-option value="Sport">Sport</mat-option>
-    <mat-option value="Politique">Politique</mat-option>
+    <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
   </mat-select>
 </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Valider</button>

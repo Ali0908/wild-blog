@@ -1,5 +1,5 @@
 export interface BlogRequest {
   title?: string | null;
-  categories?: string | null;
+  categoryId: number | null | undefined;
   access_token?: string| null;
 }

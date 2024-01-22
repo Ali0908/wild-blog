@@ -15,6 +15,7 @@ import {AuthenticationRequest} from "../../models/authentication-request";
 import {AuthenticationResponse} from "../../models/authentication-response";
 import {MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {SharedService} from "../../services/shared.service";
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -23,8 +24,9 @@ import {Router} from "@angular/router";
   imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatIconModule, HttpClientModule, RouterLink],
 })
 export class AuthenticationComponent {
+
   constructor( private authenticationService: AuthenticationService, private dialogRef: MatDialogRef<AuthenticationComponent>
-    , private router: Router) {
+    , private router: Router, private sharedSrv: SharedService) {
   }
   authRequest: AuthenticationRequest = {};
   authResponse: AuthenticationResponse = {};
@@ -32,6 +34,7 @@ export class AuthenticationComponent {
   login = true;
   hide = true;
   hideLogin = true;
+  userConnected = false;
   form = new FormGroup({
       userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -75,6 +78,8 @@ export class AuthenticationComponent {
              localStorage.setItem('token', response.access_token as string );
           console.log('User connected successfully!', response);
           window.alert('Utilisateur connecté');
+          this.userConnected = true;
+          this.sharedSrv.getUserConnexion(this.userConnected);
           this.dialogRef.close();
           this.router.navigate(['dashboard']);
           location.reload();

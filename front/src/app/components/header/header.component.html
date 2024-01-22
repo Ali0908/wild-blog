@@ -2,7 +2,7 @@
   <h1 class="authentication-title">Wild Blog</h1>
   <div class="authentication-buttons">
     <button mat-raised-button color="warn" (click)="openAuthenticationDialog()">Connexion</button>
-    <button mat-raised-button color="primary" routerLink="/blogForm">Créer votre blog</button>
+    <button mat-raised-button color="primary" routerLink="/blogForm"  *ngIf="userConnected">Créer votre blog</button>
   </div>
 </nav>
 

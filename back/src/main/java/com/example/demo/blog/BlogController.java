@@ -29,9 +29,9 @@ public class BlogController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public BlogResponseDto create(
+    public ResponseEntity<BlogResponseDto> create(
             @RequestBody BlogDto blogDto) {
-        return blogService.create(blogDto);
+        return ResponseEntity.ok(blogService.create(blogDto));
     }
 
     @PutMapping("/{id}")
