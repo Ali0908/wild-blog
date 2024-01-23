@@ -4,6 +4,7 @@ import { BlogService } from '../../services/blog/blog.service';
 import {catchError, tap} from "rxjs";
 import {BlogRequest} from "../../models/blog-request";
 import {CategoryService} from "../../services/category/category.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-form-blog',
   templateUrl: './form-blog.component.html',
@@ -11,7 +12,7 @@ import {CategoryService} from "../../services/category/category.service";
 })
 export class FormBlogComponent implements OnInit  {
    categories: any = [];
-  constructor(private blogService: BlogService, private categoryService: CategoryService) {
+  constructor(private blogService: BlogService, private categoryService: CategoryService , private router: Router) {
   }
   formBlog = new FormGroup({
     blogTitle: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
@@ -40,6 +41,7 @@ export class FormBlogComponent implements OnInit  {
         tap(response => {
           console.log('Blog créé', response);
           window.alert('Blog créé');
+          this.router.navigate(['dashboard']);
         }),
         catchError(async (error) => {
           console.error('Error connected user', error);

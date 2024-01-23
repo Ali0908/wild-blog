@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {MatFormFieldModule } from '@angular/material/form-field';
@@ -8,13 +8,12 @@ import {MatIconModule} from '@angular/material/icon';
 import { confirmPasswordValidator} from './confirmPasswordValidator.directive';
 import {RegisterRequest} from "../../models/register-request";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
-import {catchError, tap} from "rxjs";
+import {catchError, tap, window} from "rxjs";
 import { HttpClientModule } from '@angular/common/http';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthenticationRequest} from "../../models/authentication-request";
 import {AuthenticationResponse} from "../../models/authentication-response";
 import {MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
 @Component({
   selector: 'app-authentication',
@@ -23,10 +22,10 @@ import {SharedService} from "../../services/shared.service";
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatIconModule, HttpClientModule, RouterLink],
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit{
 
   constructor( private authenticationService: AuthenticationService, private dialogRef: MatDialogRef<AuthenticationComponent>
-    , private router: Router, private sharedSrv: SharedService) {
+    , private router: Router) {
   }
   authRequest: AuthenticationRequest = {};
   authResponse: AuthenticationResponse = {};
@@ -56,6 +55,7 @@ export class AuthenticationComponent {
         .pipe(
           tap(response => {
             console.log('User created successfully!', response);
+            // @ts-ignore
             window.alert('Utilisateur crée');
             this.register = false;
             this.login = true;
@@ -64,6 +64,7 @@ export class AuthenticationComponent {
         )
         .subscribe();
     } else {
+      // @ts-ignore
       window.alert('Veuillez remplir correctement tous les champs');
     }
   }
@@ -77,16 +78,15 @@ export class AuthenticationComponent {
           this.authResponse = response;
              localStorage.setItem('token', response.access_token as string );
           console.log('User connected successfully!', response);
-          window.alert('Utilisateur connecté');
-          this.userConnected = true;
-          this.sharedSrv.getUserConnexion(this.userConnected);
+          window('Utilisateur connecté');
           this.dialogRef.close();
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['dashboard']).then(r => console.log('navigate to dashboard'));
           location.reload();
         }),
         catchError(async (error) => {
           console.error('Error connected user', error);
-          window.alert('Mot de passe ou email incorrect');
+          // @ts-ignore
+          window('Mot de passe ou email incorrect');
         })
       )
       .subscribe();
@@ -95,5 +95,9 @@ export class AuthenticationComponent {
   handleFomRenderer() {
     this.register = true;
     this.login = false;
+  }
+
+  ngOnInit(): void {
+
   }
 }

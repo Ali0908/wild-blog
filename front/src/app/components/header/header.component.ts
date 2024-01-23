@@ -10,20 +10,19 @@ import {SharedService} from "../../services/shared.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
-  userConnected: boolean | undefined;
+export class HeaderComponent implements OnInit  {
+  token = '';
+  userConnected = false;
 
-  constructor(public dialog: MatDialog, private sharedSrv: SharedService) {
-    this.sharedSrv.userConnected$.subscribe((userConnected) => {
-      this.userConnected = userConnected;
-    });
+  constructor(public dialog: MatDialog) {
   }
+
+  ngOnInit(): void {
+    localStorage.getItem('token') ? this.userConnected = true : this.userConnected = false;
+    }
   openAuthenticationDialog() {
     const dialogRef = this.dialog.open(AuthenticationComponent);
 
     dialogRef.afterClosed().subscribe();
-  }
-
-  ngOnInit(): void {
   }
 }
