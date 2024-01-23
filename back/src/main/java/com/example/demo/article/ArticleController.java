@@ -15,6 +15,10 @@ public class ArticleController {
         public List<ArticleResponseDto> getAllArticles() {
         return articleService.getAllArticles();
     }
+    @GetMapping("/{blog-id}")
+    public List<ArticleResponseDto> getArticleByBlogId(@PathVariable("blog-id") Integer blogId) {
+        return articleService.getArticleByBlogId(blogId);
+    }
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public ArticleResponseDto create(

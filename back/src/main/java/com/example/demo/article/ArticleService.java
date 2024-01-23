@@ -1,6 +1,5 @@
 package com.example.demo.article;
 
-import com.example.demo.blog.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +9,11 @@ import java.util.stream.Collectors;
 @Service
 public class ArticleService {
     private final ArticleRepository articleRepository;
-    private final BlogRepository blogRepository;
-
     private final ArticleMapper articleMapper;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, BlogRepository blogRepository, ArticleMapper articleMapper) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper) {
         this.articleRepository = articleRepository;
-        this.blogRepository = blogRepository;
         this.articleMapper = articleMapper;
     }
 
@@ -32,13 +28,11 @@ public class ArticleService {
         articleRepository.save(article);
         return articleMapper.toArticleResponseDto(article);
     }
-//    public void create(ArticleRequest request) {
-//        var article = Article.builder()
-//                .id(request.getId())
-//                .title(request.getTitle())
-//                .content(request.getContent())
-//                .blog(blogRepository.findById(request.getBlogId()).orElseThrow())
-//                .build();
-//        articleRepository.save(article);
-//    }
+
+    public List<ArticleResponseDto> getArticleByBlogId(Integer blogId) {
+        return articleRepository.findArticlesByBlogId(blogId)
+                .stream()
+                .map(articleMapper::toArticleResponseDto)
+                .collect(Collectors.toList());
+    }
 }
