@@ -14,7 +14,6 @@ import {Router, RouterLink} from "@angular/router";
 import {AuthenticationRequest} from "../../models/authentication-request";
 import {AuthenticationResponse} from "../../models/authentication-response";
 import {MatDialogRef} from "@angular/material/dialog";
-import {SharedService} from "../../services/shared.service";
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
@@ -33,7 +32,6 @@ export class AuthenticationComponent implements OnInit{
   login = true;
   hide = true;
   hideLogin = true;
-  userConnected = false;
   form = new FormGroup({
       userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       email: new FormControl('', [Validators.required, Validators.email]),

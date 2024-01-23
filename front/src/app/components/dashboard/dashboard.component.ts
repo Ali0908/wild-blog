@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from "../../services/blog/blog.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,7 @@ import {BlogService} from "../../services/blog/blog.service";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
- constructor( private blogService: BlogService) {
+ constructor( private blogService: BlogService, private router: Router) {
 
  }
    allBlogs: any = [];
@@ -18,4 +19,7 @@ export class DashboardComponent implements OnInit {
       });
     }
 
+  goToArticles() {
+    this.router.navigate(['article']).then(r => console.log('navigate to article'));
+  }
 }

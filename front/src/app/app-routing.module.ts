@@ -4,10 +4,12 @@ import {FormBlogComponent} from "./components/form-blog/form-blog.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AuthenticationComponent} from "./components/authentication/authentication.component";
 import {authGuard} from "./services/authentication/auth.guard";
+import {ArticleComponent} from "./components/article/article.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'article', component: ArticleComponent},
   {
     path: 'blogForm',
     component: FormBlogComponent,
