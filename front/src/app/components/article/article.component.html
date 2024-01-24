@@ -14,7 +14,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-button>LIKE</button>
-    <button mat-button>COMMENT</button>
+    <button mat-button (click)="OpenCommentDialog(item.id)">COMMENT</button>
   </mat-card-actions>
 </mat-card>
 </div>

@@ -14,6 +14,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import { ArticleComponent } from './components/article/article.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ArticleComponent } from './components/article/article.component';
     DashboardComponent,
     FormBlogComponent,
     ArticleComponent,
+    CommentComponent,
   ],
     imports: [
         BrowserModule,

@@ -2,6 +2,7 @@ package com.example.demo.article;
 
 public record ArticleResponseDto(
 
+        Integer id,
         String title,
 
         String content,

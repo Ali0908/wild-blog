@@ -18,10 +18,11 @@ public class ArticleMapper {
 
     public ArticleResponseDto toArticleResponseDto(Article article) {
         return new ArticleResponseDto(
-            article.getTitle(),
-            article.getContent(),
-            article.getBlog().getTitle(),
-            article.getBlog().getId()
+                article.getId(),
+                article.getTitle(),
+                article.getContent(),
+                article.getBlog().getTitle(),
+                article.getBlog().getId()
         );
     }
 }
