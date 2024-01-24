@@ -6,6 +6,8 @@ public record ArticleResponseDto(
 
         String content,
 
-        String blogTitle
+        String blogTitle,
+
+        Integer blogId
 ) {
 }

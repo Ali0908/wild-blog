@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {RegisterRequest} from "../../models/register-request";
-import {AuthenticationResponse} from "../../models/authentication-response";
+import {RegisterRequest} from "../../models/auth/register-request";
+import {AuthenticationResponse} from "../../models/auth/authentication-response";
 import {HttpClient} from "@angular/common/http";
-import {AuthenticationRequest} from "../../models/authentication-request";
+import {AuthenticationRequest} from "../../models/auth/authentication-request";
 
 @Injectable({
   providedIn: 'root'

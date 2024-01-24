@@ -6,13 +6,13 @@ import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { confirmPasswordValidator} from './confirmPasswordValidator.directive';
-import {RegisterRequest} from "../../models/register-request";
+import {RegisterRequest} from "../../models/auth/register-request";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 import {catchError, tap, window} from "rxjs";
 import { HttpClientModule } from '@angular/common/http';
 import {Router, RouterLink} from "@angular/router";
-import {AuthenticationRequest} from "../../models/authentication-request";
-import {AuthenticationResponse} from "../../models/authentication-response";
+import {AuthenticationRequest} from "../../models/auth/authentication-request";
+import {AuthenticationResponse} from "../../models/auth/authentication-response";
 import {MatDialogRef} from "@angular/material/dialog";
 @Component({
   selector: 'app-authentication',

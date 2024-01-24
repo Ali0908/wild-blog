@@ -15,7 +15,7 @@ public class ArticleController {
         public List<ArticleResponseDto> getAllArticles() {
         return articleService.getAllArticles();
     }
-    @GetMapping("/{blog-id}")
+    @GetMapping("/blog/{blog-id}")
     public List<ArticleResponseDto> getArticleByBlogId(@PathVariable("blog-id") Integer blogId) {
         return articleService.getArticleByBlogId(blogId);
     }

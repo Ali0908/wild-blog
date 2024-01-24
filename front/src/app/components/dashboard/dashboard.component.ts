@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from "../../services/blog/blog.service";
 import {Router} from "@angular/router";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,18 +9,24 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
- constructor( private blogService: BlogService, private router: Router) {
+  constructor(private blogService: BlogService, private router: Router, private sharedSrv: SharedService) {
 
- }
-   allBlogs: any = [];
-    ngOnInit(): void {
-      this.blogService.getAllBlogs().subscribe((response) => {
-        this.allBlogs = response;
-        console.log(this.allBlogs);
-      });
-    }
-
-  goToArticles() {
-    this.router.navigate(['article']).then(r => console.log('navigate to article'));
   }
+
+  allBlogs: any = [];
+  clickedBlogId: any;
+
+  ngOnInit(): void {
+    this.blogService.getAllBlogs().subscribe((response) => {
+      this.allBlogs = response;
+      console.log(this.allBlogs);
+    });
+  }
+
+  handleBlogClick(blog: any) {
+    this.clickedBlogId = blog;
+    this.sharedSrv.getClickedBlogId(this.clickedBlogId);
+    this.router.navigate(['article']);
+  }
+
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { BlogService } from '../../services/blog/blog.service';
 import {catchError, tap} from "rxjs";
-import {BlogRequest} from "../../models/blog-request";
+import {BlogRequest} from "../../models/blog/blog-request";
 import {CategoryService} from "../../services/category/category.service";
 import {Router} from "@angular/router";
 @Component({

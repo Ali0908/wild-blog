@@ -20,7 +20,8 @@ public class ArticleMapper {
         return new ArticleResponseDto(
             article.getTitle(),
             article.getContent(),
-            article.getBlog().getTitle()
+            article.getBlog().getTitle(),
+            article.getBlog().getId()
         );
     }
 }

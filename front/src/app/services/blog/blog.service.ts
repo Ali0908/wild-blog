@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BlogRequest} from "../../models/blog-request";
+import {BlogRequest} from "../../models/blog/blog-request";
 
 @Injectable({
   providedIn: 'root'

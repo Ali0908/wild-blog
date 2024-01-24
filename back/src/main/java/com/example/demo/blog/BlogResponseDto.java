@@ -2,8 +2,9 @@ package com.example.demo.blog;
 
 public record BlogResponseDto(
 
-    String title,
+        Integer id,
+        String title,
 
-    String categoryName
+        String categoryName
 ) {
 }

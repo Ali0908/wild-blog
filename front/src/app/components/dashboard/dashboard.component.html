@@ -4,7 +4,7 @@
 <p>Vous pouvez dès à présent créer des articles en vous inscrivant sur notre plateforme</p>
   <h2> Voici la liste de nos blogs</h2>
   <div class="blog-list">
-  <mat-card class="card" *ngFor="let blog of allBlogs" (click)="goToArticles()">
+  <mat-card class="card" *ngFor="let blog of allBlogs" (click)="handleBlogClick(blog.id)">
     <mat-card-content class="card-content">{{blog.title}}
       <span class="blog-category">{{blog.categoryName}}</span>
     </mat-card-content>

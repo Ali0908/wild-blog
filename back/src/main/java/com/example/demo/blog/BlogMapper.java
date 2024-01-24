@@ -17,8 +17,9 @@ public class BlogMapper {
 
     public BlogResponseDto toBlogResponseDto(Blog blog) {
         return new BlogResponseDto(
-            blog.getTitle(),
-            blog.getCategory().getName()
+                blog.getId(),
+                blog.getTitle(),
+                blog.getCategory().getName()
         );
     }
 }
