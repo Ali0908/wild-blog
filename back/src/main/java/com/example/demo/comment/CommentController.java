@@ -1,7 +1,6 @@
 package com.example.demo.comment;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,5 +22,9 @@ public class CommentController {
     public CommentResponseDto create(
             @RequestBody CommentDto comment) {
         return commentService.create(comment);
+    }
+    @GetMapping("/article/{article-id}")
+    public  List<CommentResponseDto> getCommentsByArticleId(@PathVariable("article-id") Integer articleId) {
+        return commentService.getCommentsByArticleId(articleId);
     }
 }

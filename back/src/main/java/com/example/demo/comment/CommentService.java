@@ -15,6 +15,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
     }
+
     public List<CommentResponseDto> getAllArticles() {
         return commentRepository.findAll()
                 .stream()
@@ -27,12 +28,12 @@ public class CommentService {
         commentRepository.save(comment);
         return commentMapper.toCommentResponseDto(comment);
     }
-//    public void create(CommentRequest request) {
-//        var comment = Comment.builder()
-//                .id(request.getId())
-//                .content(request.getContent())
-//                .article(articleRepository.findById(request.getArticleId()).orElseThrow())
-//                .build();
-//        commentRepository.save(comment);
-//    }
+
+    public List<CommentResponseDto> getCommentsByArticleId(Integer articleId) {
+        return commentRepository.findCommentsByArticleId(articleId)
+                .stream()
+                .map(commentMapper:: toCommentResponseDto)
+                .collect(Collectors.toList());
+    }
+
 }

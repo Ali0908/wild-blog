@@ -14,10 +14,11 @@ public class CommentMapper {
         comment.setArticle(article);
         return comment;
     }
+
     public CommentResponseDto toCommentResponseDto(Comment comment) {
         return new CommentResponseDto(
                 comment.getId(),
                 comment.getContent(),
-                comment.getArticle().getTitle());
+                comment.getArticle().getId());
     }
 }

@@ -29,7 +29,8 @@ public class SecurityConfiguration {
             "/api/v1/category",
             "api/v1/article",
             "/api/v1/comment",
-            "/api/v1/article/blog/{blog-id}"
+            "/api/v1/article/blog/{blog-id}",
+            "/api/v1/comment/article/{article-id}"
     };
 
     @Bean
