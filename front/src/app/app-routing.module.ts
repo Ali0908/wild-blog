@@ -5,17 +5,24 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {AuthenticationComponent} from "./components/authentication/authentication.component";
 import {authGuard} from "./services/authentication/auth.guard";
 import {ArticleComponent} from "./components/article/article.component";
+import {FormArticleComponent} from "./components/form-article/form-article.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'article', component: ArticleComponent},
+  {path: 'register', component: AuthenticationComponent},
   {
     path: 'blogForm',
     component: FormBlogComponent,
     canActivate: [authGuard]
   },
-  {path: 'register', component: AuthenticationComponent},
+  {
+    path: 'articleForm',
+    component: FormArticleComponent,
+    canActivate: [authGuard]
+  },
+
 ];
 
 @NgModule({

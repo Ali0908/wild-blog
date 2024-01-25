@@ -2,7 +2,14 @@
   <h1 class="authentication-title">Blog Nation</h1>
   <div class="authentication-buttons">
     <button mat-raised-button color="warn" (click)="openAuthenticationDialog()">Connexion</button>
-    <button mat-raised-button color="primary" routerLink="/blogForm"  *ngIf="userConnected">Créer votre blog</button>
+    <button mat-raised-button color="primary" routerLink="/blogForm" *ngIf="visibleBlogBtn()">
+      <mat-icon>add_box</mat-icon>
+      Blog
+    </button>
+    <button mat-raised-button color="accent" routerLink="/articleForm" *ngIf="visibleArticleBtn()">
+      <mat-icon>add_circle</mat-icon>
+      Article
+    </button>
   </div>
 </nav>
 

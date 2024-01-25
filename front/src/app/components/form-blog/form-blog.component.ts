@@ -1,19 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { BlogService } from '../../services/blog/blog.service';
+import {BlogService} from '../../services/blog/blog.service';
 import {catchError, tap} from "rxjs";
 import {BlogRequest} from "../../models/blog/blog-request";
 import {CategoryService} from "../../services/category/category.service";
 import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-form-blog',
   templateUrl: './form-blog.component.html',
   styleUrls: ['./form-blog.component.css']
 })
-export class FormBlogComponent implements OnInit  {
-   categories: any = [];
-  constructor(private blogService: BlogService, private categoryService: CategoryService , private router: Router) {
+export class FormBlogComponent implements OnInit {
+  categories: any = [];
+
+  constructor(private blogService: BlogService, private categoryService: CategoryService, private router: Router) {
   }
+
   formBlog = new FormGroup({
     blogTitle: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     categories: new FormControl(null),
@@ -21,7 +24,7 @@ export class FormBlogComponent implements OnInit  {
 
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe( res => {
+    this.categoryService.getAllCategories().subscribe(res => {
       this.categories = res;
       console.log('categories', this.categories);
     })
@@ -32,7 +35,7 @@ export class FormBlogComponent implements OnInit  {
     const headers = {
       Authorization: `Bearer ${token}`
     };
-    const blog: BlogRequest  = {
+    const blog: BlogRequest = {
       title: this.formBlog.value.blogTitle,
       categoryId: this.formBlog.value.categories
     }

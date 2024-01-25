@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ArticleResponse} from "../../models/article/article-response";
+import {ArticleRequest} from "../../models/article/article-request";
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,11 @@ export class ArticleService {
   }
   getArticlesByBlogId(blogId: any) {
     return this.http.get(`${this.baseUrl}/blog/${blogId}`);
+  }
+  createArticle(articleRequest: ArticleRequest, headers: { Authorization: string; }) {
+    const token = localStorage.getItem('token');
+    headers.Authorization = `Bearer ${token}`;
+
+    return this.http.post(`${this.baseUrl}/create`, articleRequest, { headers });
   }
 }

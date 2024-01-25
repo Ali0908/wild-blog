@@ -11,10 +11,12 @@ import { FormBlogComponent } from './components/form-blog/form-blog.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import { ArticleComponent } from './components/article/article.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { FormArticleComponent } from './components/form-article/form-article.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CommentComponent } from './components/comment/comment.component';
     FormBlogComponent,
     ArticleComponent,
     CommentComponent,
+    FormArticleComponent,
   ],
     imports: [
         BrowserModule,
@@ -36,6 +39,7 @@ import { CommentComponent } from './components/comment/comment.component';
         MatSelectModule,
         ReactiveFormsModule,
         MatCardModule,
+        MatIconModule
     ],
   providers: [],
   bootstrap: [AppComponent]
