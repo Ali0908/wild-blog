@@ -1,0 +1,25 @@
+.article-form-global{
+  box-sizing: content-box;
+  width: 100%;
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .article-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border: 1px solid #3f51b5;
+    background: white;
+    border-radius: 3%;
+    .article-form-btn{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+}
+
+

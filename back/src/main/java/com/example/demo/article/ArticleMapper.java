@@ -10,6 +10,7 @@ public class ArticleMapper {
         article.setId(dto.id());
         article.setTitle(dto.title());
         article.setContent(dto.content());
+        article.setSaved(dto.isSaved());
         var blog = new Blog();
         blog.setId(dto.blogId());
         article.setBlog(blog);
@@ -21,6 +22,7 @@ public class ArticleMapper {
                 article.getId(),
                 article.getTitle(),
                 article.getContent(),
+                article.isSaved(),
                 article.getBlog().getTitle(),
                 article.getBlog().getId()
         );

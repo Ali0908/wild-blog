@@ -22,7 +22,7 @@ public class Article {
     private Integer id;
     private String title;
     private String content;
-
+    private boolean isSaved = false;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blog_id", nullable=false)
     @JsonBackReference

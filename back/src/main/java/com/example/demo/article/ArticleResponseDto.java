@@ -6,6 +6,7 @@ public record ArticleResponseDto(
         String title,
 
         String content,
+        Boolean isSaved,
 
         String blogTitle,
 

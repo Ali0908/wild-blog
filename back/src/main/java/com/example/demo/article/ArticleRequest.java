@@ -11,6 +11,7 @@ public class ArticleRequest {
     private Integer id;
     private String title;
     private String content;
+    private boolean isSaved;
     Integer blogId;
 
 }
