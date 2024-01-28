@@ -2,6 +2,7 @@ package com.example.demo.blog;
 
 import com.example.demo.article.Article;
 import com.example.demo.category.Category;
+import com.example.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -31,7 +32,13 @@ public class Blog {
     @JsonManagedReference
     private List<Article> articles;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable=false)
+    @JsonBackReference
+    private User user;
+
     public Integer getCategoryId() {
         return category.getId();
     }
+
 }

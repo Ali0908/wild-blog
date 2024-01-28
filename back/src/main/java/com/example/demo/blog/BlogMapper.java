@@ -1,6 +1,7 @@
 package com.example.demo.blog;
 
 import com.example.demo.category.Category;
+import com.example.demo.user.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,9 @@ public class BlogMapper {
         var category = new Category();
         category.setId(dto.categoryId());
         blog.setCategory(category);
+        var user = new User();
+        user.setId(dto.userId());
+        blog.setUser(user);
         return blog;
     }
 
@@ -19,7 +23,8 @@ public class BlogMapper {
         return new BlogResponseDto(
                 blog.getId(),
                 blog.getTitle(),
-                blog.getCategory().getName()
+                blog.getCategory().getName(),
+                blog.getUser().getId()
         );
     }
 }

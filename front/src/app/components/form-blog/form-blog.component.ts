@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from '../../services/blog/blog.service';
-import {catchError, tap} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {BlogRequest} from "../../models/blog/blog-request";
 import {CategoryService} from "../../services/category/category.service";
 import {Router} from "@angular/router";
+import {TokenService} from "../../services/token/token.service";
+import {TokenResponse} from "../../models/token/token-response";
 
 @Component({
   selector: 'app-form-blog',
@@ -13,8 +15,12 @@ import {Router} from "@angular/router";
 })
 export class FormBlogComponent implements OnInit {
   categories: any = [];
+  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
+  allTokens: any = [];
+  userId: number = 0;
 
-  constructor(private blogService: BlogService, private categoryService: CategoryService, private router: Router) {
+  constructor(private blogService: BlogService, private categoryService: CategoryService,
+              private router: Router, private tokenService: TokenService) {
   }
 
   formBlog = new FormGroup({
@@ -24,32 +30,58 @@ export class FormBlogComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getAllCategories();
+    this.getUser();
+  }
+
+  getAllCategories() {
     this.categoryService.getAllCategories().subscribe(res => {
       this.categories = res;
       console.log('categories', this.categories);
     })
   }
 
-  OnCreateBlog() {
-    const token = localStorage.getItem('token');
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-    const blog: BlogRequest = {
-      title: this.formBlog.value.blogTitle,
-      categoryId: this.formBlog.value.categories
-    }
-    this.blogService.createBlog(blog, headers)
-      .pipe(
-        tap(response => {
-          console.log('Blog créé', response);
-          window.alert('Blog créé');
-          this.router.navigate(['dashboard']);
-        }),
-        catchError(async (error) => {
-          console.error('Error connected user', error);
-        })
-      )
-      .subscribe();
+  getUser() {
+    this.allTokens$.subscribe(  {
+      next: (allToken) => {
+        this.allTokens = allToken;
+        console.log('allTokens', this.allTokens);
+        const tokenStorage = localStorage.getItem('token');
+        for (const token of this.allTokens) {
+          if (token.token === tokenStorage) {
+            this.userId = token.userId;
+            console.log('userId', this.userId);
+          }
+        }
+      },
+        error: (err) => {
+        console.log(err);
+      }
+    });
   }
+
+OnCreateBlog()
+{
+  const token = localStorage.getItem('token');
+  const headers = {
+    Authorization: `Bearer ${token}`
+  };
+  const blog: BlogRequest = {
+    title: this.formBlog.value.blogTitle,
+    categoryId: this.formBlog.value.categories,
+    userId: this.userId
+  }
+  this.blogService.createBlog(blog, headers)
+    .pipe(
+      tap(response => {
+        console.log('Blog créé', response);
+        window.alert('Blog créé');
+        this.router.navigate(['dashboard']);
+      }),
+      catchError(async (error) => {
+        console.error('Error connected user', error);
+      })
+    )
+    .subscribe();
+}
 }

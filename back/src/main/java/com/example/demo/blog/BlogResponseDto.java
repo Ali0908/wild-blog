@@ -4,7 +4,7 @@ public record BlogResponseDto(
 
         Integer id,
         String title,
-
-        String categoryName
+        String categoryName,
+        Integer userId
 ) {
 }

@@ -11,4 +11,5 @@ public class BlogRequest {
     private Integer id;
     private String title;
     Integer categoryId;
+    Integer userId;
 }
