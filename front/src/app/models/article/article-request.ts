@@ -3,4 +3,5 @@ export interface ArticleRequest {
   content?: string  | null;
   title?: string | null;
   isSaved?: boolean;
+  userId?: number | null;
 }

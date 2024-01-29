@@ -9,3 +9,6 @@
  
 2) ## Fichier concerné: form-blog.component.ts
 J'ai un souci avec la méthode OnCreateArticle(), elle est appelée automatiquement après l'éxécution de OnSaveSubmit() ce que je ne souhaite pas.
+
+2) ## Fichier concerné: form-blog.component.ts et form-article.component.ts
+Les méthodes getUser() et fetchUser() sont similaires il faudrait les factoriser dans le service SharedService.

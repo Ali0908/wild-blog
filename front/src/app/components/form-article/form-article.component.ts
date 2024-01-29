@@ -3,8 +3,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from "../../services/blog/blog.service";
 import {ArticleRequest} from "../../models/article/article-request";
 import {ArticleService} from "../../services/article/article.service";
-import {catchError, tap} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
+import {TokenResponse} from "../../models/token/token-response";
+import {TokenService} from "../../services/token/token.service";
 
 @Component({
   selector: 'app-form-article',
@@ -13,9 +15,12 @@ import {Router} from "@angular/router";
 })
 export class FormArticleComponent implements OnInit {
   blogs: any = [];
-  isSaved = false;
+  allTokens$: Observable<TokenResponse> = this.tokenSrv.getAllTokens();
+  allTokens: any = [];
+  userId: number = 0;
 
-  constructor(private articleSrv: ArticleService, private blogSrv: BlogService, private router: Router) {
+  constructor(private articleSrv: ArticleService, private blogSrv: BlogService, private router: Router,
+  private tokenSrv: TokenService) {
   }
 
   articleForm = new FormGroup({
@@ -33,7 +38,8 @@ export class FormArticleComponent implements OnInit {
       title: this.articleForm.value.title,
       content: this.articleForm.value.content,
       blogId: this.articleForm.value.blogId,
-      isSaved: false
+      isSaved: false,
+      userId: this.userId
     }
     this.articleSrv.createArticle(article, headers)
       .pipe(
@@ -49,6 +55,26 @@ export class FormArticleComponent implements OnInit {
       .subscribe();
   }
 
+
+  fetchUser() {
+    this.allTokens$.subscribe(  {
+      next: (allToken) => {
+        this.allTokens = allToken;
+        console.log('allTokens', this.allTokens);
+        const tokenStorage = localStorage.getItem('token');
+        for (const token of this.allTokens) {
+          if (token.token === tokenStorage) {
+            this.userId = token.userId;
+            console.log('userId', this.userId);
+          }
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
   OnSavedArticle() {
     const token = localStorage.getItem('token');
     const headers = {
@@ -58,7 +84,8 @@ export class FormArticleComponent implements OnInit {
       title: this.articleForm.value.title,
       content: this.articleForm.value.content,
       blogId: this.articleForm.value.blogId,
-      isSaved: true
+      isSaved: true,
+      userId: this.userId
     }
     this.articleSrv.createArticle(article, headers)
       .pipe(
@@ -76,6 +103,7 @@ export class FormArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBlogs();
+    this.fetchUser();
   }
 
   getAllBlogs() {
