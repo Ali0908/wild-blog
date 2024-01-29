@@ -18,19 +18,22 @@ public class BlogController {
     private final CategoryRepository categoryRepository;
 
     @GetMapping
-    public List<BlogResponseDto>  getAllBlogs() {
+    public List<BlogResponseDto> getAllBlogs() {
         return blogService.getAllBlogs();
 
     }
+
     @GetMapping("/{blog-id}")
     public BlogResponseDto getBlogById(@PathVariable("blog-id") Integer id) {
         return blogService.getBlogById(id);
     }
+
     @GetMapping("/user/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public List<BlogResponseDto> getBlogByUserId(@PathVariable("user-id") Integer userId) {
         return blogService.getBlogByUserId(userId);
     }
+
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public ResponseEntity<BlogResponseDto> create(
@@ -40,12 +43,10 @@ public class BlogController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public Blog updateBlog(@PathVariable Integer id, @RequestBody Blog updatedBlog) {
-        var existingBlog = blogRepository.findById(id).orElseThrow();
-        existingBlog.setTitle(updatedBlog.getTitle());
-        existingBlog.setCategory(categoryRepository.findById(updatedBlog.getCategoryId()).orElseThrow());
+    public ResponseEntity<Blog> updateBlog(@PathVariable Integer id,
+                                           @RequestBody Blog blogDto) {
+        return ResponseEntity.ok(blogService.updateBlog(id, blogDto));
 
-        return blogRepository.save(existingBlog);
     }
 
     @DeleteMapping("/{id}")
