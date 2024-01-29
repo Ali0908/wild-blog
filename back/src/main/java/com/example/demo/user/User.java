@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.article.Article;
 import com.example.demo.blog.Blog;
 import com.example.demo.token.Token;
 import jakarta.persistence.*;
@@ -34,6 +35,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Blog> blogs;
+
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return role.getAuthorities();

@@ -5,6 +5,7 @@ public record ArticleDto(
     String title,
     String content,
     Boolean isSaved,
-    Integer blogId
+    Integer blogId,
+    Integer userId
 ) {
 }

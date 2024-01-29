@@ -2,6 +2,7 @@ package com.example.demo.article;
 
 import com.example.demo.blog.Blog;
 import com.example.demo.comment.Comment;
+import com.example.demo.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -31,4 +32,9 @@ public class Article {
     @OneToMany(mappedBy = "article")
     @JsonManagedReference
     private List<Comment> comments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable=false)
+    @JsonBackReference
+    private User user;
 }

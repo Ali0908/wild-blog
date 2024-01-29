@@ -1,6 +1,7 @@
 package com.example.demo.article;
 
 import com.example.demo.blog.Blog;
+import com.example.demo.user.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,9 @@ public class ArticleMapper {
         var blog = new Blog();
         blog.setId(dto.blogId());
         article.setBlog(blog);
+        var user = new User();
+        user.setId(dto.userId());
+        article.setUser(user);
         return article;
     }
 
@@ -24,7 +28,8 @@ public class ArticleMapper {
                 article.getContent(),
                 article.isSaved(),
                 article.getBlog().getTitle(),
-                article.getBlog().getId()
+                article.getBlog().getId(),
+                article.getUser().getId()
         );
     }
 }

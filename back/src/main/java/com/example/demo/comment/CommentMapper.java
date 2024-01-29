@@ -1,6 +1,7 @@
 package com.example.demo.comment;
 
 import com.example.demo.article.Article;
+import com.example.demo.user.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,9 @@ public class CommentMapper {
         var article = new Article();
         article.setId(dto.articleId());
         comment.setArticle(article);
+        var user = new User();
+        user.setId(dto.userId());
+        comment.setUser(user);
         return comment;
     }
 
@@ -19,6 +23,8 @@ public class CommentMapper {
         return new CommentResponseDto(
                 comment.getId(),
                 comment.getContent(),
-                comment.getArticle().getId());
+                comment.getArticle().getId(),
+                comment.getUser().getId()
+        );
     }
 }

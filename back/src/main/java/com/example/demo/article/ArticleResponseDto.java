@@ -4,12 +4,10 @@ public record ArticleResponseDto(
 
         Integer id,
         String title,
-
         String content,
         Boolean isSaved,
-
         String blogTitle,
-
-        Integer blogId
+        Integer blogId,
+        Integer userId
 ) {
 }

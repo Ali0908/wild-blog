@@ -6,12 +6,14 @@ import {BehaviorSubject, Subject} from "rxjs";
 })
 export class SharedService {
   private ObservableUserConnexion = new Subject<string>();
+  private ObservableUserId = new BehaviorSubject<number>(0);
   private ObservableClickedBlogId = new BehaviorSubject<number>(0);
   private ObservableClickedArticleId = new BehaviorSubject<number>(0);
   private ObservableHideArticleBtn = new BehaviorSubject<boolean>(false);
   private ObservableHideBlogBtn = new BehaviorSubject<boolean>(false);
   constructor() { }
   userToken$ = this.ObservableUserConnexion.asObservable();
+  userId$ = this.ObservableUserId.asObservable();
   clickedBlogId$ = this.ObservableClickedBlogId.asObservable();
   clickedArticleId$ = this.ObservableClickedArticleId.asObservable();
   hideArticleBtn$ = this.ObservableHideArticleBtn.asObservable();
@@ -35,5 +37,8 @@ getUserConnexion(userToken: string) {
 
   getClickedArticleId(articleId: number) {
     this.ObservableClickedArticleId.next(articleId);
+  }
+  getUserId(userId: number) {
+    this.ObservableUserId.next(userId);
   }
 }
