@@ -26,7 +26,11 @@ public class BlogController {
     public BlogResponseDto getBlogById(@PathVariable("blog-id") Integer id) {
         return blogService.getBlogById(id);
     }
-
+    @GetMapping("/user/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    public List<BlogResponseDto> getBlogByUserId(@PathVariable("user-id") Integer userId) {
+        return blogService.getBlogByUserId(userId);
+    }
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public ResponseEntity<BlogResponseDto> create(

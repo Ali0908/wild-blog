@@ -33,7 +33,7 @@ public class SecurityConfiguration {
             "/api/v1/blog",
             "/api/v1/token",
             "/api/v1/article/blog/{blog-id}",
-            "/api/v1/comment/article/{article-id}"
+            "/api/v1/comment/article/{article-id}",
     };
 
     @Bean

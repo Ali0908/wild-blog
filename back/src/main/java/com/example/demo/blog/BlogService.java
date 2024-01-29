@@ -28,6 +28,12 @@ public class BlogService {
                 .map(blogMapper::toBlogResponseDto)
                 .orElseThrow();
     }
+    public List<BlogResponseDto> getBlogByUserId(Integer userId) {
+        return blogRepository.findBlogByUserId(userId)
+                .stream()
+                .map(blogMapper::toBlogResponseDto)
+                .collect(Collectors.toList());
+    }
 
     public Blog updateBlog(Integer id, Blog updatedBlog) {
         return null;
@@ -42,15 +48,4 @@ public class BlogService {
         blogRepository.save(blog);
         return blogMapper.toBlogResponseDto(blog);
     }
-
-/*    public void create(BlogRequest request) {
-        var blog = Blog.builder()
-                .id(request.getId())
-                .title(request.getTitle())
-                .category(categoryRepository.findById(request.getCategoryId()).orElseThrow())
-                .build();
-        blogRepository.save(blog);
-    }*/
-
-
 }
