@@ -35,4 +35,11 @@ public class ArticleService {
                 .map(articleMapper::toArticleResponseDto)
                 .collect(Collectors.toList());
     }
+
+    public List<ArticleResponseDto> getArticleSavedByUserId(Integer userId) {
+        return articleRepository.findArticlesSavedByUserId(userId)
+                .stream()
+                .map(articleMapper::toArticleResponseDto)
+                .collect(Collectors.toList());
+    }
 }

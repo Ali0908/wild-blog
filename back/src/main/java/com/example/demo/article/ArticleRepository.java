@@ -12,4 +12,10 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
             where a.blog.id = :blogId
             """)
     List<Article> findArticlesByBlogId(@Param("blogId") Integer blogId);
+    @Query(value = """
+            select a from Article a
+            where a.user.id = :userId
+            and a.isSaved = true
+            """)
+    List<Article> findArticlesSavedByUserId(@Param("userId") Integer userId);
 }
