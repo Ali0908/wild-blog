@@ -1,6 +1,5 @@
 package com.example.demo.blog;
 
-import com.example.demo.category.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BlogController {
     private final BlogService blogService;
-    private final BlogRepository blogRepository;
-    private final CategoryRepository categoryRepository;
 
     @GetMapping
     public List<BlogResponseDto> getAllBlogs() {

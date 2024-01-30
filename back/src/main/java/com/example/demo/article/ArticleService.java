@@ -42,4 +42,30 @@ public class ArticleService {
                 .map(articleMapper::toArticleResponseDto)
                 .collect(Collectors.toList());
     }
+
+    public List<ArticleResponseDto> getArticlePublishedByUserId(Integer userId) {
+        return articleRepository.findArticlesPublishedByUserId(userId)
+                .stream()
+                .map(articleMapper::toArticleResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    public ArticleResponseDto updateArticledSavedByUserId(Integer id, Integer userId, ArticleDto updateArticleDto) {
+        var existingSavedArticle = articleRepository.findArticlesSavedByIdAndUserId(id, userId).orElseThrow();
+        existingSavedArticle.setTitle(updateArticleDto.getTitle());
+        existingSavedArticle.setContent(updateArticleDto.getContent());
+        existingSavedArticle.setSaved(updateArticleDto.getIsSaved());
+        existingSavedArticle.setBlog(existingSavedArticle.getBlog());
+        articleRepository.save(existingSavedArticle);
+        return articleMapper.toArticleResponseDto(existingSavedArticle);
+    }
+
+    public ArticleResponseDto updateArticledPublishedByUserId(Integer id, Integer userId, ArticleDto updateArticleDto) {
+        var existingArticle = articleRepository.findArticlesPublishedByIdAndUserId(id, userId).orElseThrow();
+        existingArticle.setTitle(updateArticleDto.getTitle());
+        existingArticle.setContent(updateArticleDto.getContent());
+        existingArticle.setSaved(updateArticleDto.getIsSaved());
+        articleRepository.save(existingArticle);
+        return articleMapper.toArticleResponseDto(existingArticle);
+    }
 }
