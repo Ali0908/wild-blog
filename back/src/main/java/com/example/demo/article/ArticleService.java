@@ -68,4 +68,9 @@ public class ArticleService {
         articleRepository.save(existingArticle);
         return articleMapper.toArticleResponseDto(existingArticle);
     }
+
+    public void deleteAllArticlesByUserId(Integer userId) {
+        var AllExistingArticles = articleRepository.findArticlesSavedByUserId(userId);
+        articleRepository.deleteAll(AllExistingArticles);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.demo.article;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +58,12 @@ public class ArticleController {
                                                                               @PathVariable("user-id") Integer userId,
                                                                               @RequestBody ArticleDto updateArticleDto) {
         return ResponseEntity.ok(articleService.updateArticledPublishedByUserId(id, userId, updateArticleDto));
+    }
+
+    @DeleteMapping("user/articles/article-saved/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        articleService.deleteAllArticlesByUserId(userId);
     }
 }
