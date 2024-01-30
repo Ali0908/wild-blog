@@ -42,17 +42,41 @@ public class BlogController {
     }
 
     @PutMapping("/{blog-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    public ResponseEntity<BlogResponseDto> updateAllBlog(@PathVariable("blog-id") Integer id,
+                                                         @RequestBody BlogDto updateAllBlogDto) {
+        return ResponseEntity.ok(blogService.updateAllBlog(id, updateAllBlogDto));
+    }
+
+    @PutMapping("/user/{blog-id}/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public ResponseEntity<BlogResponseDto> updateBlog(@PathVariable("blog-id") Integer id,
-                                                      @RequestBody BlogDto updateBlogDto) {
-        return  ResponseEntity.ok(blogService.updateBlog(id, updateBlogDto));
+    public ResponseEntity<BlogResponseDto> updateBlogByUserId(@PathVariable("blog-id") Integer id,
+                                                              @PathVariable("user-id") Integer userId,
+                                                              @RequestBody BlogDto updateBlogDto) {
+        return ResponseEntity.ok(blogService.updateBlogByUserId(id, userId, updateBlogDto));
     }
 
 
-
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteBlog(@PathVariable Integer id) {
         blogService.deleteUser(id);
+    }
+
+
+    @DeleteMapping("user/blogs/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllBlogsByUserId(@PathVariable("user-id") Integer userId) {
+        blogService.deleteAllBlogsByUserId(userId);
+    }
+
+    @DeleteMapping("user/blog/{blog-id}/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBlogByUserId(@PathVariable("blog-id") Integer blogId,
+                                   @PathVariable ("user-id") Integer userId) {
+        blogService.deleteBlogByUserId(blogId, userId);
     }
 }

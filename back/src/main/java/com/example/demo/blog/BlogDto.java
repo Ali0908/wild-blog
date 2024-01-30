@@ -6,6 +6,6 @@ public record BlogDto(
     @Getter Integer id,
     @Getter String title,
     @Getter Integer categoryId,
-    Integer userId
+    @Getter Integer userId
 ) {
 }

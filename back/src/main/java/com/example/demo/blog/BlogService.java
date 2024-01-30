@@ -52,14 +52,31 @@ public class BlogService {
         return blogMapper.toBlogResponseDto(blog);
     }
 
-    public BlogResponseDto updateBlog(Integer id, BlogDto updateBlogDto) {
+    public BlogResponseDto updateAllBlog(Integer id, BlogDto updateAllBlogDto) {
         var existingBlog = blogRepository.findById(id).orElseThrow();
+        existingBlog.setTitle(updateAllBlogDto.getTitle());
+        existingBlog.setCategory(categoryRepository.findById(updateAllBlogDto.getCategoryId()).orElseThrow());
+        blogRepository.save(existingBlog);
+        return blogMapper.toBlogResponseDto(existingBlog);
+    }
+
+    public BlogResponseDto updateBlogByUserId(Integer id, Integer userId, BlogDto updateBlogDto) {
+        var existingBlog = blogRepository.findBlogByIdAndUserId(id, userId).orElseThrow();
         existingBlog.setTitle(updateBlogDto.getTitle());
         existingBlog.setCategory(categoryRepository.findById(updateBlogDto.getCategoryId()).orElseThrow());
         blogRepository.save(existingBlog);
         return blogMapper.toBlogResponseDto(existingBlog);
     }
 
+    public void deleteAllBlogsByUserId(Integer userId) {
+        var AllExistingBlogs = blogRepository.findBlogByUserId(userId);
+         blogRepository.deleteAll(AllExistingBlogs);
+    }
+
+    public void deleteBlogByUserId(Integer blogId, Integer userId) {
+        var existingBlog = blogRepository.findBlogByIdAndUserId(blogId, userId).orElseThrow();
+        blogRepository.delete(existingBlog);
+    }
 }
 
 //        var existingBlog = blogRepository.findById(id).orElseThrow();
