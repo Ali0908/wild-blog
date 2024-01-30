@@ -10,9 +10,11 @@ import java.util.Optional;
 
 public interface BlogRepository  extends JpaRepository<Blog, Integer> {
 
+
     @Query(value = """
             select b from Blog b
             where b.user.id = :userId
             """)
     List<Blog> findBlogByUserId(@Param("userId") Integer userId);
+
 }

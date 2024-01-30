@@ -37,8 +37,4 @@ public class Blog {
     @JsonBackReference
     private User user;
 
-    public Integer getCategoryId() {
-        return category.getId();
-    }
-
 }

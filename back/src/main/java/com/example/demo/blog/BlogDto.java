@@ -1,9 +1,11 @@
 package com.example.demo.blog;
 
+import lombok.Getter;
+
 public record BlogDto(
-    Integer id,
-    String title,
-    Integer categoryId,
+    @Getter Integer id,
+    @Getter String title,
+    @Getter Integer categoryId,
     Integer userId
 ) {
 }

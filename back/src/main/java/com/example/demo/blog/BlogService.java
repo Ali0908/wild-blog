@@ -42,13 +42,6 @@ public class BlogService {
                 .collect(Collectors.toList());
     }
 
-    public Blog updateBlog(Integer id, Blog updatedBlog) {
-        var existingBlog = blogRepository.findById(id).orElseThrow();
-        existingBlog.setTitle(updatedBlog.getTitle());
-        existingBlog.setCategory(categoryRepository.findById(updatedBlog.getCategoryId()).orElseThrow());
-        return blogRepository.save(existingBlog);
-    }
-
     public void deleteUser(Integer id) {
         blogRepository.deleteById(id);
     }
@@ -58,6 +51,15 @@ public class BlogService {
         blogRepository.save(blog);
         return blogMapper.toBlogResponseDto(blog);
     }
+
+    public BlogResponseDto updateBlog(Integer id, BlogDto updateBlogDto) {
+        var existingBlog = blogRepository.findById(id).orElseThrow();
+        existingBlog.setTitle(updateBlogDto.getTitle());
+        existingBlog.setCategory(categoryRepository.findById(updateBlogDto.getCategoryId()).orElseThrow());
+        blogRepository.save(existingBlog);
+        return blogMapper.toBlogResponseDto(existingBlog);
+    }
+
 }
 
 //        var existingBlog = blogRepository.findById(id).orElseThrow();

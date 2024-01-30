@@ -41,13 +41,14 @@ public class BlogController {
         return ResponseEntity.ok(blogService.create(blogDto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{blog-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public ResponseEntity<Blog> updateBlog(@PathVariable Integer id,
-                                           @RequestBody Blog blogDto) {
-        return ResponseEntity.ok(blogService.updateBlog(id, blogDto));
-
+    public ResponseEntity<BlogResponseDto> updateBlog(@PathVariable("blog-id") Integer id,
+                                                      @RequestBody BlogDto updateBlogDto) {
+        return  ResponseEntity.ok(blogService.updateBlog(id, updateBlogDto));
     }
+
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
