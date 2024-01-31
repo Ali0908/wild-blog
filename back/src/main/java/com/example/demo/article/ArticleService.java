@@ -73,4 +73,9 @@ public class ArticleService {
         var AllExistingArticles = articleRepository.findArticlesSavedByUserId(userId);
         articleRepository.deleteAll(AllExistingArticles);
     }
+
+    public void deleteArticleByUserId(Integer articleId, Integer userId) {
+        var existingArticle = articleRepository.findArticlesSavedByIdAndUserId(articleId, userId).orElseThrow();
+        articleRepository.delete(existingArticle);
+    }
 }

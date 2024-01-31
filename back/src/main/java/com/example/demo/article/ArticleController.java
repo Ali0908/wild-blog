@@ -66,4 +66,12 @@ public class ArticleController {
     public void deleteAllArticlesByUserId(@PathVariable("user-id") Integer userId) {
         articleService.deleteAllArticlesByUserId(userId);
     }
+
+    @DeleteMapping("user/article/article-saved/{article-id}/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteArticleByUserId(@PathVariable("article-id") Integer articleId,
+                                      @PathVariable("user-id") Integer userId) {
+        articleService.deleteArticleByUserId(articleId, userId);
+    }
 }
