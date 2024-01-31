@@ -35,6 +35,12 @@ public class CommentService {
                 .map(commentMapper:: toCommentResponseDto)
                 .collect(Collectors.toList());
     }
+    public List<CommentResponseDto> getArticlesByUserId(Integer userId) {
+return commentRepository.findCommentByUserId(userId)
+                .stream()
+                .map(commentMapper:: toCommentResponseDto)
+                .collect(Collectors.toList());
+    }
 
     public CommentResponseDto updateCommentByUserId(Integer id, Integer userId, CommentDto updateCommentDto) {
         var existingComment = commentRepository.findCommentByIdAndUserId(id, userId).orElseThrow();
@@ -47,4 +53,11 @@ public class CommentService {
         var existingComment = commentRepository.findCommentByIdAndUserId(commentId, userId).orElseThrow();
         commentRepository.delete(existingComment);
     }
+
+    public void deleteAllCommentsByUserId(Integer userId) {
+        var AllExistingComments = commentRepository.findCommentByUserId(userId);
+        commentRepository.deleteAll(AllExistingComments);
+    }
+
+
 }

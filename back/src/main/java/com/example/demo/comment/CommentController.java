@@ -30,6 +30,11 @@ public class CommentController {
     public List<CommentResponseDto> getCommentsByArticleId(@PathVariable("article-id") Integer articleId) {
         return commentService.getCommentsByArticleId(articleId);
     }
+    @GetMapping("/user/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    public List<CommentResponseDto> getArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        return commentService.getArticlesByUserId(userId);
+    }
 
     @PutMapping("/user/{comment-id}/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
@@ -44,5 +49,11 @@ public class CommentController {
     public void deleteCommentByUserId(@PathVariable("comment-id") Integer commentId,
                                    @PathVariable ("user-id") Integer userId) {
         commentService.deleteCommentByUserId(commentId, userId);
+    }
+    @DeleteMapping("users/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllCommentsByUserId(@PathVariable("user-id") Integer userId) {
+        commentService.deleteAllCommentsByUserId(userId);
     }
 }
