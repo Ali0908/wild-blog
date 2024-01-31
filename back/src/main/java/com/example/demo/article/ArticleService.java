@@ -69,13 +69,23 @@ public class ArticleService {
         return articleMapper.toArticleResponseDto(existingArticle);
     }
 
-    public void deleteAllArticlesByUserId(Integer userId) {
-        var AllExistingArticles = articleRepository.findArticlesSavedByUserId(userId);
-        articleRepository.deleteAll(AllExistingArticles);
+    public void deleteAllSavedArticlesByUserId(Integer userId) {
+        var AllSavedArticles = articleRepository.findArticlesSavedByUserId(userId);
+        articleRepository.deleteAll(AllSavedArticles);
     }
 
-    public void deleteArticleByUserId(Integer articleId, Integer userId) {
-        var existingArticle = articleRepository.findArticlesSavedByIdAndUserId(articleId, userId).orElseThrow();
-        articleRepository.delete(existingArticle);
+    public void deleteSavedArticleByUserId(Integer articleId, Integer userId) {
+        var savedArticle = articleRepository.findArticlesSavedByIdAndUserId(articleId, userId).orElseThrow();
+        articleRepository.delete(savedArticle);
+    }
+
+    public void deleteAllPublishedArticlesByUserId(Integer userId) {
+        var AllPublishedArticles = articleRepository.findArticlesPublishedByUserId(userId);
+        articleRepository.deleteAll(AllPublishedArticles);
+    }
+
+    public void deletePublishedArticleByUserId(Integer articleId, Integer userId) {
+        var publishedArticle = articleRepository.findArticlesPublishedByIdAndUserId(articleId, userId).orElseThrow();
+        articleRepository.delete(publishedArticle);
     }
 }

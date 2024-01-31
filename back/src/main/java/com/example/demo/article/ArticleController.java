@@ -63,15 +63,30 @@ public class ArticleController {
     @DeleteMapping("user/articles/article-saved/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAllArticlesByUserId(@PathVariable("user-id") Integer userId) {
-        articleService.deleteAllArticlesByUserId(userId);
+    public void deleteAllSavedArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        articleService.deleteAllSavedArticlesByUserId(userId);
     }
 
     @DeleteMapping("user/article/article-saved/{article-id}/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteArticleByUserId(@PathVariable("article-id") Integer articleId,
-                                      @PathVariable("user-id") Integer userId) {
-        articleService.deleteArticleByUserId(articleId, userId);
+    public void deleteSavedArticleByUserId(@PathVariable("article-id") Integer articleId,
+                                           @PathVariable("user-id") Integer userId) {
+        articleService.deleteSavedArticleByUserId(articleId, userId);
+    }
+
+    @DeleteMapping("user/articles/article-published/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllPublishedArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        articleService.deleteAllPublishedArticlesByUserId(userId);
+    }
+
+    @DeleteMapping("user/article/article-published/{article-id}/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletePublishedArticleByUserId(@PathVariable("article-id") Integer articleId,
+                                               @PathVariable("user-id") Integer userId) {
+        articleService.deletePublishedArticleByUserId(articleId, userId);
     }
 }
