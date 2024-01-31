@@ -42,4 +42,9 @@ public class CommentService {
         commentRepository.save(existingComment);
         return commentMapper.toCommentResponseDto(existingComment);
     }
+
+    public void deleteCommentByUserId(Integer commentId, Integer userId) {
+        var existingComment = commentRepository.findCommentByIdAndUserId(commentId, userId).orElseThrow();
+        commentRepository.delete(existingComment);
+    }
 }

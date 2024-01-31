@@ -1,6 +1,7 @@
 package com.example.demo.comment;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,12 @@ public class CommentController {
                                                                     @PathVariable("user-id") Integer userId,
                                                                     @RequestBody CommentDto updateCommentDto) {
         return ResponseEntity.ok(commentService.updateCommentByUserId(id, userId, updateCommentDto));
+    }
+    @DeleteMapping("user/{comment-id}/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCommentByUserId(@PathVariable("comment-id") Integer commentId,
+                                   @PathVariable ("user-id") Integer userId) {
+        commentService.deleteCommentByUserId(commentId, userId);
     }
 }

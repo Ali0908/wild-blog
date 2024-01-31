@@ -16,9 +16,9 @@ public class BlogService {
     private final BlogMapper blogMapper;
 
     @Autowired
-    public BlogService(BlogRepository blogRepository, CategoryRepository categoryRepository, CategoryRepository categoryRepository1, BlogMapper blogMapper) {
+    public BlogService(BlogRepository blogRepository, CategoryRepository categoryRepository, BlogMapper blogMapper) {
         this.blogRepository = blogRepository;
-        this.categoryRepository = categoryRepository1;
+        this.categoryRepository = categoryRepository;
         this.blogMapper = blogMapper;
     }
 
@@ -78,8 +78,3 @@ public class BlogService {
         blogRepository.delete(existingBlog);
     }
 }
-
-//        var existingBlog = blogRepository.findById(id).orElseThrow();
-//        existingBlog.setTitle(updatedBlog.getTitle());
-//        existingBlog.setCategory(categoryRepository.findById(updatedBlog.getCategoryId()).orElseThrow());
-//        return blogRepository.save(existingBlog);
