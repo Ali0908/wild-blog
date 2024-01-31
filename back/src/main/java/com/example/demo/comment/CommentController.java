@@ -1,6 +1,7 @@
 package com.example.demo.comment;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +24,17 @@ public class CommentController {
             @RequestBody CommentDto comment) {
         return commentService.create(comment);
     }
+
     @GetMapping("/article/{article-id}")
-    public  List<CommentResponseDto> getCommentsByArticleId(@PathVariable("article-id") Integer articleId) {
+    public List<CommentResponseDto> getCommentsByArticleId(@PathVariable("article-id") Integer articleId) {
         return commentService.getCommentsByArticleId(articleId);
+    }
+
+    @PutMapping("/user/{comment-id}/{user-id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    public ResponseEntity<CommentResponseDto> updateCommentByUserId(@PathVariable("comment-id") Integer id,
+                                                                    @PathVariable("user-id") Integer userId,
+                                                                    @RequestBody CommentDto updateCommentDto) {
+        return ResponseEntity.ok(commentService.updateCommentByUserId(id, userId, updateCommentDto));
     }
 }

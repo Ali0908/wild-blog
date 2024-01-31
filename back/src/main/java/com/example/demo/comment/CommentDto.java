@@ -1,9 +1,11 @@
 package com.example.demo.comment;
 
+import lombok.Getter;
+
 public record CommentDto(
-    Integer id,
-    String content,
-    Integer articleId,
-    Integer userId
+    @Getter Integer id,
+    @Getter String content,
+    @Getter Integer articleId,
+    @Getter Integer userId
 ) {
 }

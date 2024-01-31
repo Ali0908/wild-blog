@@ -36,4 +36,10 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    public CommentResponseDto updateCommentByUserId(Integer id, Integer userId, CommentDto updateCommentDto) {
+        var existingComment = commentRepository.findCommentByIdAndUserId(id, userId).orElseThrow();
+        existingComment.setContent(updateCommentDto.getContent());
+        commentRepository.save(existingComment);
+        return commentMapper.toCommentResponseDto(existingComment);
+    }
 }
