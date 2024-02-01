@@ -1,5 +1,8 @@
 <nav class="authentication-container">
-  <h1 class="authentication-title">Blog Nation</h1>
+  <div class="authentication-links">
+    <h1 class="authentication-title">Blog Nation</h1>
+    <a routerLink="/blogsByAuthor" class="myBlogs"> Blogs</a>
+  </div>
   <div class="authentication-buttons">
     <button mat-raised-button color="warn" (click)="openAuthenticationDialog()">Connexion</button>
     <button mat-raised-button color="primary" routerLink="/blogForm" *ngIf="visibleBlogBtn()">

@@ -6,6 +6,7 @@ import {AuthenticationComponent} from "./components/authentication/authenticatio
 import {authGuard} from "./services/authentication/auth.guard";
 import {ArticleComponent} from "./components/article/article.component";
 import {FormArticleComponent} from "./components/form-article/form-article.component";
+import {BlogsByAuthorComponent} from "./components/blogs-by-author/blogs-by-author.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -20,6 +21,11 @@ const routes: Routes = [
   {
     path: 'articleForm',
     component: FormArticleComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'blogsByAuthor',
+    component: BlogsByAuthorComponent,
     canActivate: [authGuard]
   },
 
