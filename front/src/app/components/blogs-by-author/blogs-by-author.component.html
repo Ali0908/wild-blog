@@ -1,0 +1,50 @@
+<app-header></app-header>
+<table mat-table [dataSource]="dataBlogs" class="mat-elevation-z8">
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? toggleAllRows() : null"
+      [checked]="selection.hasValue() && isAllSelected()"
+      [indeterminate]="selection.hasValue() && !isAllSelected()"
+      [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th><td mat-cell *matCellDef="let row">
+    <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="$event ? selection.toggle(row) : null"
+                  [checked]="selection.isSelected(row)"
+                  [aria-label]="checkboxLabel(row)">
+    </mat-checkbox>
+  </td>
+  </ng-container>
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Titre
+
+    </th>
+    <td mat-cell *matCellDef="let item">{{ item.title }}
+
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="categoryName">
+    <th mat-header-cell *matHeaderCellDef>Catégorie
+
+    </th>
+    <td mat-cell *matCellDef="let item">{{item.categoryName}}
+
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef>Modifier</th>
+    <td mat-cell *matCellDef="let item" class="actions-links">
+     <a routerLink=""><mat-icon>edit</mat-icon></a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Supprimer</th>
+    <td mat-cell *matCellDef="let item" class="actions-links" (click)="deleteBlog(item.id)">
+      <mat-icon class="icon-delete">delete</mat-icon>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
+</table>
+

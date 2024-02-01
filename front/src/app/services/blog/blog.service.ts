@@ -24,4 +24,8 @@ export class BlogService {
     return this.http.get<BlogResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });
   }
 
+  deleteBlogByUser(blogId: string, userId: string, headers: { Authorization: string; }) {
+    return this.http.delete(`${this.baseUrl}/user/blog/${blogId}/${userId}`, { headers });
+  }
+
 }
