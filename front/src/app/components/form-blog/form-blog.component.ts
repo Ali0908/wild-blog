@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {TokenService} from "../../services/token/token.service";
 import {TokenResponse} from "../../models/token/token-response";
 import {SharedService} from "../../services/shared.service";
+import {CategoryRequest} from "../../models/category/categoryRequest";
 
 @Component({
   selector: 'app-form-blog',
@@ -15,13 +16,13 @@ import {SharedService} from "../../services/shared.service";
   styleUrls: ['./form-blog.component.css']
 })
 export class FormBlogComponent implements OnInit {
-  categories: any = [];
+  categories: CategoryRequest[] = [];
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   userId: number = 0;
 
   constructor(private blogService: BlogService, private categoryService: CategoryService,
-              private router: Router, private tokenService: TokenService, private sharedService: SharedService) {
+              private router: Router, private tokenService: TokenService) {
   }
 
   formBlog = new FormGroup({
@@ -52,7 +53,6 @@ export class FormBlogComponent implements OnInit {
           if (token.token === tokenStorage) {
             this.userId = token.userId;
             console.log('userId', this.userId);
-            this.sharedService.getUserId(this.userId);
           }
         }
       },

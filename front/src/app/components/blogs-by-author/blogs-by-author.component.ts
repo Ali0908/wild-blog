@@ -24,7 +24,7 @@ export class BlogsByAuthorComponent implements OnInit {
     Authorization: `Bearer ${this.token}`
   };
 
-  constructor(private blogService: BlogService, private tokenService: TokenService, private sharedService: SharedService) {
+  constructor(private blogService: BlogService, private tokenService: TokenService) {
   }
 
   ngOnInit(): void {
@@ -52,11 +52,9 @@ export class BlogsByAuthorComponent implements OnInit {
   }
 
   fetchBlogsByAuthor() {
-
     if (this.token && this.userId !== 0) {
       this.blogService.getAllBlogsByUser(this.userId, this.headers).subscribe((data: BlogResponse[]) => {
         this.dataBlogs = data;
-        this.sharedService.getAllBlogsByAuthor(this.dataBlogs);
         // console.log('dataSource', this.dataBlogs);
       });
     }

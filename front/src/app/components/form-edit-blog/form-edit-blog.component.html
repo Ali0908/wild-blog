@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="form-blog-global">
+  <form  class="form-blog-container" [formGroup]="editFormBlog" (ngSubmit)="OnEditBlog()">
+    <mat-form-field>
+      <mat-label>Titre du blog</mat-label>
+      <input matInput formControlName="blogTitle" required>
+      <mat-error *ngIf="editFormBlog.get('blogTitle')?.hasError('required')">Merci un titre pour votre blog</mat-error>
+      <mat-error *ngIf="editFormBlog.get('blogTitle')?.hasError('minlength') || editFormBlog.get('blogTitle')?.hasError('maxlength')"> Le titre doit contenir entre 2 et 50 caratères</mat-error>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Catégories</mat-label>
+      <mat-select formControlName="categories">
+        <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Valider</button>
+  </form>
+</div>

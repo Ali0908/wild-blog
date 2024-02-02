@@ -21,6 +21,7 @@ import {BlogsByAuthorComponent} from './components/blogs-by-author/blogs-by-auth
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
 import { FormEditBlogComponent } from './components/form-edit-blog/form-edit-blog.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -34,21 +35,22 @@ import { FormEditBlogComponent } from './components/form-edit-blog/form-edit-blo
     BlogsByAuthorComponent,
     FormEditBlogComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    AuthenticationComponent,
-    AppRoutingModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatTableModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        AuthenticationComponent,
+        AppRoutingModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatIconModule,
+        MatCheckboxModule,
+        MatTableModule,
+        NgOptimizedImage
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

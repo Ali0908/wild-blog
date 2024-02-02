@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   userConnected = false;
   hideArticleBtn = false;
   hideBlogBtn = false;
+  logo: string = "assets/images/logo.png";
 
   constructor(public dialog: MatDialog, private sharedService: SharedService) {
     this.sharedService.hideArticleBtn$.subscribe({
