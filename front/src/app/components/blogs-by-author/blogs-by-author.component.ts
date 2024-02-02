@@ -5,6 +5,7 @@ import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {SelectionModel} from "@angular/cdk/collections";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-blogs-by-author',
@@ -23,7 +24,7 @@ export class BlogsByAuthorComponent implements OnInit {
     Authorization: `Bearer ${this.token}`
   };
 
-  constructor(private blogService: BlogService, private tokenService: TokenService) {
+  constructor(private blogService: BlogService, private tokenService: TokenService, private sharedService: SharedService) {
   }
 
   ngOnInit(): void {
@@ -55,7 +56,8 @@ export class BlogsByAuthorComponent implements OnInit {
     if (this.token && this.userId !== 0) {
       this.blogService.getAllBlogsByUser(this.userId, this.headers).subscribe((data: BlogResponse[]) => {
         this.dataBlogs = data;
-        console.log('dataSource', this.dataBlogs);
+        this.sharedService.getAllBlogsByAuthor(this.dataBlogs);
+        // console.log('dataSource', this.dataBlogs);
       });
     }
   }
@@ -86,18 +88,18 @@ export class BlogsByAuthorComponent implements OnInit {
     const blogToString = blogId.toString();
     const userToString = this.userId.toString();
     this.blogService.deleteBlogByUser(blogToString, userToString, this.headers)
-       .pipe(
-      tap(response => {
-        console.log('Blog créé', response);
-        window.alert('Blog supprimé');
-        location.reload();
-      }),
-      catchError(async (error) => {
-        console.error('Error connected user', error);
-        window.alert('Erreur lors de la suppression du blog');
-        location.reload();
-      })
-    )
+      .pipe(
+        tap(response => {
+          // console.log('Blog créé', response);
+          window.alert('Blog supprimé');
+          location.reload();
+        }),
+        catchError(async (error) => {
+          // console.error('Error connected user', error);
+          window.alert('Erreur lors de la suppression du blog');
+          location.reload();
+        })
+      )
       .subscribe();
   }
 
@@ -105,12 +107,12 @@ export class BlogsByAuthorComponent implements OnInit {
     userId = this.userId.toString();
     this.blogService.deleteAllBlogsByUser(userId, this.headers).pipe(
       tap(response => {
-        console.log('Blog créé', response);
+        // console.log('Blog créé', response);
         window.alert('Tous les blogs ont été supprimés');
         location.reload();
       }),
       catchError(async (error) => {
-        console.error('Error connected user', error);
+        // console.error('Error connected user', error);
         window.alert('Un ou plusieurs blogs n\'ont pas été supprimés car ils sont liés à des articles. Supprimez d\'abord les articles.');
         location.reload();
       })

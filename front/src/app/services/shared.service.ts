@@ -11,6 +11,7 @@ export class SharedService {
   private ObservableClickedArticleId = new BehaviorSubject<number>(0);
   private ObservableHideArticleBtn = new BehaviorSubject<boolean>(false);
   private ObservableHideBlogBtn = new BehaviorSubject<boolean>(false);
+  private ObservableBlogsByAuthor = new Subject<any>();
   constructor() { }
   userToken$ = this.ObservableUserConnexion.asObservable();
   userId$ = this.ObservableUserId.asObservable();
@@ -18,6 +19,7 @@ export class SharedService {
   clickedArticleId$ = this.ObservableClickedArticleId.asObservable();
   hideArticleBtn$ = this.ObservableHideArticleBtn.asObservable();
   hideBlogBtn$ = this.ObservableHideBlogBtn.asObservable();
+  blogsByAuthor$ = this.ObservableBlogsByAuthor.asObservable();
 
 
 getUserConnexion(userToken: string) {
@@ -40,5 +42,8 @@ getUserConnexion(userToken: string) {
   }
   getUserId(userId: number) {
     this.ObservableUserId.next(userId);
+  }
+  getAllBlogsByAuthor(blogs: any) {
+    this.ObservableBlogsByAuthor.next(blogs);
   }
 }

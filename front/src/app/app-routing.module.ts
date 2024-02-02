@@ -7,6 +7,7 @@ import {authGuard} from "./services/authentication/auth.guard";
 import {ArticleComponent} from "./components/article/article.component";
 import {FormArticleComponent} from "./components/form-article/form-article.component";
 import {BlogsByAuthorComponent} from "./components/blogs-by-author/blogs-by-author.component";
+import {FormEditBlogComponent} from "./components/form-edit-blog/form-edit-blog.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'blogForm',
     component: FormBlogComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editBlogForm/:id',
+    component: FormEditBlogComponent,
     canActivate: [authGuard]
   },
   {

@@ -20,6 +20,7 @@ import {FormArticleComponent} from './components/form-article/form-article.compo
 import {BlogsByAuthorComponent} from './components/blogs-by-author/blogs-by-author.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
+import { FormEditBlogComponent } from './components/form-edit-blog/form-edit-blog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatTableModule} from "@angular/material/table";
     CommentComponent,
     FormArticleComponent,
     BlogsByAuthorComponent,
+    FormEditBlogComponent,
   ],
   imports: [
     BrowserModule,

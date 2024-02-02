@@ -1,8 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Karma', sans-serif;
+  background-image: url('assets/laptop-background.jpg');
+
+  .form-blog-global {
+    margin-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100%;
-    width: 100%;
-    margin:0;
-    font-family: 'Karma', sans-serif;
-    background-image: url('assets/laptop-background.jpg'); }
+    border: 1px solid #3f51b5;
+    background: white;
+    border-radius: 3%;
+  }
+}
