@@ -27,5 +27,8 @@ export class BlogService {
   deleteBlogByUser(blogId: string, userId: string, headers: { Authorization: string; }) {
     return this.http.delete(`${this.baseUrl}/user/blog/${blogId}/${userId}`, { headers });
   }
+  deleteAllBlogsByUser(userId: string, headers: { Authorization: string; }) {
+    return this.http.delete(`${this.baseUrl}/user/blogs/${userId}`, { headers });
+  }
 
 }

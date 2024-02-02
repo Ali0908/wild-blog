@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogResponse} from "../../models/blog/blog-response";
 import {BlogService} from "../../services/blog/blog.service";
-import {Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {SelectionModel} from "@angular/cdk/collections";
@@ -85,6 +85,36 @@ export class BlogsByAuthorComponent implements OnInit {
   deleteBlog(blogId: number) {
     const blogToString = blogId.toString();
     const userToString = this.userId.toString();
-    this.blogService.deleteBlogByUser(blogToString, userToString, this.headers).subscribe();
+    this.blogService.deleteBlogByUser(blogToString, userToString, this.headers)
+       .pipe(
+      tap(response => {
+        console.log('Blog créé', response);
+        window.alert('Blog supprimé');
+        location.reload();
+      }),
+      catchError(async (error) => {
+        console.error('Error connected user', error);
+        window.alert('Erreur lors de la suppression du blog');
+        location.reload();
+      })
+    )
+      .subscribe();
+  }
+
+  deleteAllBlogs(userId: string) {
+    userId = this.userId.toString();
+    this.blogService.deleteAllBlogsByUser(userId, this.headers).pipe(
+      tap(response => {
+        console.log('Blog créé', response);
+        window.alert('Tous les blogs ont été supprimés');
+        location.reload();
+      }),
+      catchError(async (error) => {
+        console.error('Error connected user', error);
+        window.alert('Un ou plusieurs blogs n\'ont pas été supprimés car ils sont liés à des articles. Supprimez d\'abord les articles.');
+        location.reload();
+      })
+    )
+      .subscribe()
   }
 }
