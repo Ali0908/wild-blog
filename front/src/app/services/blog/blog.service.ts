@@ -23,6 +23,9 @@ export class BlogService {
   getAllBlogsByUser(userId:number, headers: { Authorization: string; }): Observable<BlogResponse[]>{
     return this.http.get<BlogResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });
   }
+  updateBlogByUser(blogId: string, userId:number, blogRequest: BlogRequest, headers: { Authorization: string; }) {
+    return this.http.put(`${this.baseUrl}/user/${blogId}/${userId}`, blogRequest, { headers });
+  }
 
   deleteBlogByUser(blogId: string, userId: string, headers: { Authorization: string; }) {
     return this.http.delete(`${this.baseUrl}/user/blog/${blogId}/${userId}`, { headers });
