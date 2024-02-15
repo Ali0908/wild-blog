@@ -1,5 +1,9 @@
 <app-header></app-header>
-<table mat-table [dataSource]="dataBlogs" class="mat-elevation-z8">
+<mat-form-field>
+  <mat-label>Filtre</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. tech">
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>

@@ -5,7 +5,7 @@ import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {SelectionModel} from "@angular/cdk/collections";
-import {SharedService} from "../../services/shared.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-blogs-by-author',
@@ -13,13 +13,14 @@ import {SharedService} from "../../services/shared.service";
   styleUrls: ['./blogs-by-author.component.css']
 })
 export class BlogsByAuthorComponent implements OnInit {
-  dataBlogs: BlogResponse[] = [];
+  dataBlogs = [];
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   userId: number = 0;
   headerColumns = ['select', 'title', 'categoryName', 'update', 'delete'];
   selection = new SelectionModel<BlogResponse>(true, []);
   token = localStorage.getItem('token');
+  dataSource: any;
   headers = {
     Authorization: `Bearer ${this.token}`
   };
@@ -29,6 +30,7 @@ export class BlogsByAuthorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.dataSource = new MatTableDataSource<BlogResponse[]>();
   }
 
   getUser() {
@@ -53,9 +55,8 @@ export class BlogsByAuthorComponent implements OnInit {
 
   fetchBlogsByAuthor() {
     if (this.token && this.userId !== 0) {
-      this.blogService.getAllBlogsByUser(this.userId, this.headers).subscribe((data: BlogResponse[]) => {
-        this.dataBlogs = data;
-        // console.log('dataSource', this.dataBlogs);
+      this.blogService.getAllBlogsByUser(this.userId, this.headers).subscribe((data:any) => {
+        this.dataSource = new MatTableDataSource<BlogResponse[]>(data);
       });
     }
   }
@@ -116,5 +117,10 @@ export class BlogsByAuthorComponent implements OnInit {
       })
     )
       .subscribe()
+  }
+
+  applyFilter(event: Event) {
+    const filterValue: any = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

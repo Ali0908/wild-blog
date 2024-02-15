@@ -36,7 +36,6 @@ export class FormEditBlogComponent implements OnInit {
     , private categoryService: CategoryService, private router: Router) {
   }
 
-
   getUser() {
     this.allTokens$.subscribe({
       next: (allToken) => {
