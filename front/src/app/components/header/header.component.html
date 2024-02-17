@@ -1,9 +1,13 @@
 <nav class="authentication-container">
-  <div class="authentication-links">
+  <div class="authentication-logo">
     <a routerLink="/dashboard" class="dashboard">
       <img src="assets/logo.png" alt="logo" class="logo"/>
     </a>
+  </div>
+  <div class="authentication-links">
     <a routerLink="/blogsByAuthor" class="myBlogs"> Blogs</a>
+    <a routerLink="/articlesByAuthor" class="myBlogs"> Articles</a>
+    <a routerLink="/commentsByAuthor" class="myBlogs"> Comments</a>
   </div>
   <div class="authentication-buttons">
     <button mat-raised-button color="warn" (click)="openAuthenticationDialog()">Connexion</button>

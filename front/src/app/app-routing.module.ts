@@ -8,6 +8,8 @@ import {ArticleComponent} from "./components/article/article.component";
 import {FormArticleComponent} from "./components/form-article/form-article.component";
 import {BlogsByAuthorComponent} from "./components/blogs-by-author/blogs-by-author.component";
 import {FormEditBlogComponent} from "./components/form-edit-blog/form-edit-blog.component";
+import {ArticlesByAuthorComponent} from "./components/articles-by-author/articles-by-author.component";
+import {CommentsByAuthorComponent} from "./components/comments-by-author/comments-by-author.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -34,7 +36,16 @@ const routes: Routes = [
     component: BlogsByAuthorComponent,
     canActivate: [authGuard]
   },
-
+  {
+    path: 'articlesByAuthor',
+    component: ArticlesByAuthorComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'commentsByAuthor',
+    component: CommentsByAuthorComponent,
+    canActivate: [authGuard]
+  },
 ];
 
 @NgModule({

@@ -2,6 +2,12 @@
   display: flex;
   justify-content: space-between;
 
+  .authentication-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+  }
   .authentication-links {
     display: flex;
     justify-content: space-between;
@@ -27,6 +33,12 @@
   }
 
   .authentication-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+  }
+  .users-interface {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,14 +1,13 @@
 <app-header></app-header>
 <div class="dashboard-container">
-<h1> Bienvenue sur Blog Nation !</h1>
-<p>Vous pouvez dès à présent créer des articles en vous inscrivant sur notre plateforme</p>
-  <h2> Voici la liste de nos blogs</h2>
+  <p>Vous pouvez dès à présent créer des articles en vous inscrivant sur notre plateforme</p>
+  <h2 class="dashboard-title"> Nos blogs:</h2>
   <div class="blog-list">
-  <mat-card class="card" *ngFor="let blog of allBlogs" (click)="handleBlogClick(blog.id)">
-    <mat-card-content class="card-content">{{blog.title}}
-      <span class="blog-category">{{blog.categoryName}}</span>
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="card" *ngFor="let blog of allBlogs" (click)="handleBlogClick(blog.id)">
+      <mat-card-content class="card-content">{{ blog.title }}
+        <span class="blog-category">{{ blog.categoryName }}</span>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
 

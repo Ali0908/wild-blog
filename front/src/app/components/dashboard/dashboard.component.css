@@ -6,6 +6,9 @@
   height: 100%;
   color: white;
   font-family: 'Karma', sans-serif;
+  .dashboard-title{
+    text-decoration: underline #fff;
+  }
 }
 
 .blog-list {

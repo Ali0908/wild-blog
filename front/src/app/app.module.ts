@@ -22,6 +22,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
 import { FormEditBlogComponent } from './components/form-edit-blog/form-edit-blog.component';
 import {NgOptimizedImage} from "@angular/common";
+import { CommentsByAuthorComponent } from './components/comments-by-author/comments-by-author.component';
+import { ArticlesByAuthorComponent } from './components/articles-by-author/articles-by-author.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import {NgOptimizedImage} from "@angular/common";
     FormArticleComponent,
     BlogsByAuthorComponent,
     FormEditBlogComponent,
+    CommentsByAuthorComponent,
+    ArticlesByAuthorComponent,
   ],
     imports: [
         BrowserModule,
