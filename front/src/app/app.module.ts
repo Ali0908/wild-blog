@@ -25,6 +25,7 @@ import {NgOptimizedImage} from "@angular/common";
 import {CommentsByAuthorComponent} from './components/comments-by-author/comments-by-author.component';
 import {ArticlesByAuthorComponent} from './components/articles-by-author/articles-by-author.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { FormEditArticleComponent } from './components/form-edit-article/form-edit-article.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     FormEditBlogComponent,
     CommentsByAuthorComponent,
     ArticlesByAuthorComponent,
+    FormEditArticleComponent,
   ],
   imports: [
     BrowserModule,
