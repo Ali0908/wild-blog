@@ -20,10 +20,11 @@ import {FormArticleComponent} from './components/form-article/form-article.compo
 import {BlogsByAuthorComponent} from './components/blogs-by-author/blogs-by-author.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTableModule} from "@angular/material/table";
-import { FormEditBlogComponent } from './components/form-edit-blog/form-edit-blog.component';
+import {FormEditBlogComponent} from './components/form-edit-blog/form-edit-blog.component';
 import {NgOptimizedImage} from "@angular/common";
-import { CommentsByAuthorComponent } from './components/comments-by-author/comments-by-author.component';
-import { ArticlesByAuthorComponent } from './components/articles-by-author/articles-by-author.component';
+import {CommentsByAuthorComponent} from './components/comments-by-author/comments-by-author.component';
+import {ArticlesByAuthorComponent} from './components/articles-by-author/articles-by-author.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -39,22 +40,23 @@ import { ArticlesByAuthorComponent } from './components/articles-by-author/artic
     CommentsByAuthorComponent,
     ArticlesByAuthorComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatDialogModule,
-        AuthenticationComponent,
-        AppRoutingModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatCardModule,
-        MatIconModule,
-        MatCheckboxModule,
-        MatTableModule,
-        NgOptimizedImage
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDialogModule,
+    AuthenticationComponent,
+    AppRoutingModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatTableModule,
+    NgOptimizedImage,
+    MatTabsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
