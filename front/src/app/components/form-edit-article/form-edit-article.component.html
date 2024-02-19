@@ -1,5 +1,5 @@
-<!--<div class="article-form-global">
-  <form class="article-form-container" [formGroup]="editArticleForm" (ngSubmit)="OnUpdateArticle()">
+<div class="article-form-global">
+  <form class="article-form-container" [formGroup]="editArticleForm" (ngSubmit)="OnUpdatePublishedArticle()">
     <mat-form-field>
       <mat-label>Saisissez le titre de l'article</mat-label>
       <input matInput formControlName="title" required>
@@ -25,8 +25,8 @@
       </mat-error>
     </mat-form-field>
     <div class="article-form-btn">
-      <button mat-raised-button (click)="OnSavedArticle()">Sauvegarder</button>
+      <button mat-raised-button (click)="OnUpdateSavedArticle()">Sauvegarder</button>
       <button mat-raised-button color="primary" type="submit">Publier</button>
     </div>
   </form>
-</div>-->
+</div>
