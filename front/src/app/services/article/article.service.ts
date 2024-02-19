@@ -23,10 +23,7 @@ export class ArticleService {
 
     return this.http.post(`${this.baseUrl}/create`, articleRequest, { headers });
   }
-  getAllArticlesPublishedByUser(userId: number, headers: { Authorization: string; }): Observable<ArticleResponse[]> {
-    return this.http.get<ArticleResponse[]>(`${this.baseUrl}/user/article-published/${userId}`, { headers });
-  }
-  getAllArticlesSavedByUser(userId: number, headers: { Authorization: string; }): Observable<ArticleResponse[]> {
-    return this.http.get<ArticleResponse[]>(`${this.baseUrl}/user/article-saved/${userId}`, { headers });
+  getAllArticlesByUser(userId: number, headers: { Authorization: string; }): Observable<ArticleResponse[]> {
+    return this.http.get<ArticleResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });
   }
 }

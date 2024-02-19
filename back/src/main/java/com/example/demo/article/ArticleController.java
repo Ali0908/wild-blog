@@ -25,16 +25,10 @@ public class ArticleController {
         return articleService.getArticleByBlogId(blogId);
     }
 
-    @GetMapping("/user/article-saved/{user-id}")
+    @GetMapping("/user/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public List<ArticleResponseDto> getArticleSavedByUserId(@PathVariable("user-id") Integer userId) {
-        return articleService.getArticleSavedByUserId(userId);
-    }
-
-    @GetMapping("/user/article-published/{user-id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public List<ArticleResponseDto> getArticlePublishedByUserId(@PathVariable("user-id") Integer userId) {
-        return articleService.getArticlePublishedByUserId(userId);
+    public List<ArticleResponseDto> getArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        return articleService.getArticlesByUserId(userId);
     }
 
     @PostMapping("/create")
@@ -44,49 +38,26 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.create(articleDto));
     }
 
-    @PutMapping("/user/article-saved/{article-id}/{user-id}")
+    @PutMapping("/user/{article-id}/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public ResponseEntity<ArticleResponseDto> updateArticledSavedByUserId(@PathVariable("article-id") Integer articleId,
+    public ResponseEntity<ArticleResponseDto> updateArticlesByUserId(@PathVariable("article-id") Integer articleId,
                                                                           @PathVariable("user-id") Integer userId,
                                                                           @RequestBody ArticleDto updateArticleDto) {
-        return ResponseEntity.ok(articleService.updateArticledSavedByUserId(articleId, userId, updateArticleDto));
+        return ResponseEntity.ok(articleService.updateArticlesByUserId(articleId, userId, updateArticleDto));
     }
 
-    @PutMapping("/user/article-published/{article-id}/{user-id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    public ResponseEntity<ArticleResponseDto> updateArticledPublishedByUserId(@PathVariable("article-id") Integer id,
-                                                                              @PathVariable("user-id") Integer userId,
-                                                                              @RequestBody ArticleDto updateArticleDto) {
-        return ResponseEntity.ok(articleService.updateArticledPublishedByUserId(id, userId, updateArticleDto));
-    }
-
-    @DeleteMapping("user/articles/article-saved/{user-id}")
+    @DeleteMapping("user/articles/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteAllSavedArticlesByUserId(@PathVariable("user-id") Integer userId) {
-        articleService.deleteAllSavedArticlesByUserId(userId);
+    public void deleteAllArticlesByUserId(@PathVariable("user-id") Integer userId) {
+        articleService.deleteAllArticlesByUserId(userId);
     }
 
-    @DeleteMapping("user/article/article-saved/{article-id}/{user-id}")
+    @DeleteMapping("user/article/{article-id}/{user-id}")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteSavedArticleByUserId(@PathVariable("article-id") Integer articleId,
+    public void deleteArticleByUserId(@PathVariable("article-id") Integer articleId,
                                            @PathVariable("user-id") Integer userId) {
-        articleService.deleteSavedArticleByUserId(articleId, userId);
-    }
-
-    @DeleteMapping("user/articles/article-published/{user-id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteAllPublishedArticlesByUserId(@PathVariable("user-id") Integer userId) {
-        articleService.deleteAllPublishedArticlesByUserId(userId);
-    }
-
-    @DeleteMapping("user/article/article-published/{article-id}/{user-id}")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
-    @ResponseStatus(HttpStatus.OK)
-    public void deletePublishedArticleByUserId(@PathVariable("article-id") Integer articleId,
-                                               @PathVariable("user-id") Integer userId) {
-        articleService.deletePublishedArticleByUserId(articleId, userId);
+        articleService.deleteArticleByUserId(articleId, userId);
     }
 }

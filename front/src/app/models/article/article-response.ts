@@ -4,4 +4,5 @@ export interface ArticleResponse {
   blogTitle?: string;
   content?: string;
   title?: string;
+  isSaved?: boolean;
 }

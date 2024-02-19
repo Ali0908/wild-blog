@@ -23,6 +23,7 @@ public class ArticleService {
                 .map(articleMapper::toArticleResponseDto)
                 .collect(Collectors.toList());
     }
+
     public ArticleResponseDto create(ArticleDto articleDto) {
         var article = articleMapper.toArticle(articleDto);
         articleRepository.save(article);
@@ -36,56 +37,32 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
-    public List<ArticleResponseDto> getArticleSavedByUserId(Integer userId) {
-        return articleRepository.findArticlesSavedByUserId(userId)
+    public List<ArticleResponseDto> getArticlesByUserId(Integer userId) {
+        return articleRepository.findArticlesByUserId(userId)
                 .stream()
                 .map(articleMapper::toArticleResponseDto)
                 .collect(Collectors.toList());
     }
 
-    public List<ArticleResponseDto> getArticlePublishedByUserId(Integer userId) {
-        return articleRepository.findArticlesPublishedByUserId(userId)
-                .stream()
-                .map(articleMapper::toArticleResponseDto)
-                .collect(Collectors.toList());
-    }
-
-    public ArticleResponseDto updateArticledSavedByUserId(Integer id, Integer userId, ArticleDto updateArticleDto) {
-        var existingSavedArticle = articleRepository.findArticlesSavedByIdAndUserId(id, userId).orElseThrow();
-        existingSavedArticle.setTitle(updateArticleDto.getTitle());
-        existingSavedArticle.setContent(updateArticleDto.getContent());
-        existingSavedArticle.setSaved(updateArticleDto.getIsSaved());
-        existingSavedArticle.setBlog(existingSavedArticle.getBlog());
-        articleRepository.save(existingSavedArticle);
-        return articleMapper.toArticleResponseDto(existingSavedArticle);
-    }
-
-    public ArticleResponseDto updateArticledPublishedByUserId(Integer id, Integer userId, ArticleDto updateArticleDto) {
-        var existingArticle = articleRepository.findArticlesPublishedByIdAndUserId(id, userId).orElseThrow();
+    public ArticleResponseDto updateArticlesByUserId(Integer id, Integer userId, ArticleDto updateArticleDto) {
+        var existingArticle = articleRepository.findArticlesByIdAndUserId(id, userId).orElseThrow();
         existingArticle.setTitle(updateArticleDto.getTitle());
         existingArticle.setContent(updateArticleDto.getContent());
         existingArticle.setSaved(updateArticleDto.getIsSaved());
+        existingArticle.setBlog(existingArticle.getBlog());
         articleRepository.save(existingArticle);
         return articleMapper.toArticleResponseDto(existingArticle);
     }
 
-    public void deleteAllSavedArticlesByUserId(Integer userId) {
-        var AllSavedArticles = articleRepository.findArticlesSavedByUserId(userId);
+
+    public void deleteAllArticlesByUserId(Integer userId) {
+        var AllSavedArticles = articleRepository.findArticlesByUserId(userId);
         articleRepository.deleteAll(AllSavedArticles);
     }
 
-    public void deleteSavedArticleByUserId(Integer articleId, Integer userId) {
-        var savedArticle = articleRepository.findArticlesSavedByIdAndUserId(articleId, userId).orElseThrow();
+    public void deleteArticleByUserId(Integer articleId, Integer userId) {
+        var savedArticle = articleRepository.findArticlesByIdAndUserId(articleId, userId).orElseThrow();
         articleRepository.delete(savedArticle);
     }
 
-    public void deleteAllPublishedArticlesByUserId(Integer userId) {
-        var AllPublishedArticles = articleRepository.findArticlesPublishedByUserId(userId);
-        articleRepository.deleteAll(AllPublishedArticles);
-    }
-
-    public void deletePublishedArticleByUserId(Integer articleId, Integer userId) {
-        var publishedArticle = articleRepository.findArticlesPublishedByIdAndUserId(articleId, userId).orElseThrow();
-        articleRepository.delete(publishedArticle);
-    }
 }

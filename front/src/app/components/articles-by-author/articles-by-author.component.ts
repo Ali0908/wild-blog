@@ -19,14 +19,14 @@ export class ArticlesByAuthorComponent implements OnInit {
     Authorization: `Bearer ${this.token}`
   };
   articlesPublished: ArticleResponse[] = [];
+  allArticles: ArticleResponse[] = [];
   articlesSaved: ArticleResponse[]= [];
   constructor( private tokenService: TokenService, private articleService: ArticleService) {
   }
 
   ngOnInit(): void {
         this.getUser();
-        this.fetchArticlesPublishedByAuthor();
-        this.fetchArticlesSavedByAuthor();
+        this.fetchArticlesByAuthor();
     }
   getUser() {
     this.allTokens$.subscribe({
@@ -38,8 +38,7 @@ export class ArticlesByAuthorComponent implements OnInit {
           if (token.token === tokenStorage) {
             this.userId = token.userId;
             console.log('userId', this.userId);
-            this.fetchArticlesSavedByAuthor();
-            this.fetchArticlesPublishedByAuthor();
+            this.fetchArticlesByAuthor();
           }
         }
       },
@@ -49,20 +48,12 @@ export class ArticlesByAuthorComponent implements OnInit {
     });
   }
 
-   fetchArticlesSavedByAuthor() {
+   fetchArticlesByAuthor() {
     if (this.token && this.userId !== 0) {
-      this.articleService.getAllArticlesSavedByUser(this.userId, this.headers).subscribe((data) => {
-        this.articlesSaved = data;
-        console.log('articlesSaved', this.articlesSaved);
-      });
-    }
-  }
-
-  fetchArticlesPublishedByAuthor() {
-    if (this.token && this.userId !== 0) {
-      this.articleService.getAllArticlesPublishedByUser(this.userId, this.headers).subscribe((data) => {
-        this.articlesPublished = data;
-        console.log('articlesPublished', this.articlesPublished);
+      this.articleService.getAllArticlesByUser(this.userId, this.headers).subscribe((data) => {
+        this.allArticles = data;
+        this.articlesPublished = this.allArticles.filter((article) => article.isSaved === false);
+        this.articlesSaved = this.allArticles.filter((article) => article.isSaved === true);
       });
     }
   }
