@@ -26,4 +26,7 @@ export class ArticleService {
   getAllArticlesByUser(userId: number, headers: { Authorization: string; }): Observable<ArticleResponse[]> {
     return this.http.get<ArticleResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });
   }
+  updateArticleByUser(articleId: string, userId:number, articleRequest: ArticleRequest, headers: { Authorization: string; }) {
+    return this.http.put(`${this.baseUrl}/user/${articleId}/${userId}`, articleRequest, { headers });
+  }
 }

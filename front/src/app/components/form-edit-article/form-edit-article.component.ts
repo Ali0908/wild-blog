@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from "../../services/blog/blog.service";
-import {Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {ArticleService} from "../../services/article/article.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ArticleResponse} from "../../models/article/article-response";
+import {ArticleRequest} from "../../models/article/article-request";
 
 @Component({
   selector: 'app-form-edit-article',
@@ -25,7 +26,7 @@ export class FormEditArticleComponent implements OnInit {
   };
   private allArticles: ArticleResponse[]= [];
   constructor(private blogSrv: BlogService, private tokenService: TokenService, private articleService: ArticleService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class FormEditArticleComponent implements OnInit {
 
   editArticleForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
-    content: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
+    content: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
     blog: new FormControl(''),
   })
 
@@ -61,11 +62,25 @@ export class FormEditArticleComponent implements OnInit {
   }
 
   OnUpdatePublishedArticle() {
-    const token = localStorage.getItem('token');
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-  }
+      const article: ArticleRequest = {
+        title: this.editArticleForm.value.title,
+        content: this.editArticleForm.value.content,
+        blogTitle: this.editArticleForm.value.blog,
+        isSaved: false
+      }
+      this.articleService.updateArticleByUser(this.articleId, this.userId, article, this.headers)
+        .pipe(
+          tap(response => {
+            console.log('Article modifié', response);
+            window.alert('Article modifié');
+            this.router.navigate(['articlesByAuthor']);
+          }),
+          catchError(async (error) => {
+            console.error('Error connected user', error);
+          })
+        )
+        .subscribe();
+    }
 
   getAllBlogs() {
     this.blogSrv.getAllBlogs().subscribe(res => {
@@ -75,6 +90,24 @@ export class FormEditArticleComponent implements OnInit {
   }
 
   OnUpdateSavedArticle() {
+    const article: ArticleRequest = {
+      title: this.editArticleForm.value.title,
+      content: this.editArticleForm.value.content,
+      blogTitle: this.editArticleForm.value.blog,
+      isSaved: true
+    }
+    this.articleService.updateArticleByUser(this.articleId, this.userId, article, this.headers)
+      .pipe(
+        tap(response => {
+          console.log('Article modifié', response);
+          window.alert('Article modifié');
+          this.router.navigate(['articlesByAuthor']);
+        }),
+        catchError(async (error) => {
+          console.error('Error connected user', error);
+        })
+      )
+      .subscribe();
   }
 
   fetchArticleIdFromUrl() {

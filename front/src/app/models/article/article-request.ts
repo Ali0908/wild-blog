@@ -4,4 +4,5 @@ export interface ArticleRequest {
   title?: string | null;
   isSaved?: boolean;
   userId?: number | null;
+  blogTitle?: string | null;
 }
