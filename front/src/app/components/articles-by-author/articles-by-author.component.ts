@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {ArticleService} from "../../services/article/article.service";
@@ -56,5 +56,44 @@ export class ArticlesByAuthorComponent implements OnInit {
         this.articlesSaved = this.allArticles.filter((article) => article.isSaved === true);
       });
     }
+  }
+
+  deleteArticle(articleId: number) {
+    const articleIdString = articleId.toString();
+    const userToString = this.userId.toString();
+    this.articleService.deleteArticleByUser(articleIdString, userToString, this.headers)
+      .pipe(
+      tap(response => {
+        // console.log('Blog créé', response);
+        window.alert('Article supprimé');
+        location.reload();
+      }),
+      catchError(async (error) => {
+        // console.error('Error connected user', error);
+        window.alert('Erreur lors de la suppression de l\'article');
+        location.reload();
+      })
+    )
+      .subscribe();
+
+  }
+
+  deleteAllArticles(userId: string) {
+    userId = this.userId.toString();
+    this.articleService.deleteAllArticlesByUser(userId, this.headers)
+      .pipe(
+        tap(response => {
+          // console.log('Blog créé', response);
+          window.alert('Tous les articles ont été supprimés');
+          location.reload();
+        }),
+        catchError(async (error) => {
+          // console.error('Error connected user', error);
+          window.alert('Erreur lors de la suppression des articles');
+          location.reload();
+        })
+      )
+      .subscribe();
+
   }
 }

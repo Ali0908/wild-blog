@@ -29,4 +29,13 @@ export class ArticleService {
   updateArticleByUser(articleId: string, userId:number, articleRequest: ArticleRequest, headers: { Authorization: string; }) {
     return this.http.put(`${this.baseUrl}/user/${articleId}/${userId}`, articleRequest, { headers });
   }
+
+  deleteArticleByUser(articleId: string, userId: string, headers: { Authorization: string; }) {
+    return this.http.delete(`${this.baseUrl}/user/article/${articleId}/${userId}`, { headers });
+  }
+
+  deleteAllArticlesByUser(userId: string, headers: { Authorization: string }) {
+    return this.http.delete(`${this.baseUrl}/user/articles/${userId}`, { headers });
+
+  }
 }
