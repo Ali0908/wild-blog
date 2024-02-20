@@ -11,8 +11,8 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label> Sélectionner un blog</mat-label>
-      <mat-select formControlName="blogId">
-        <mat-option *ngFor="let blog of blogs" [value]="blog.id">{{ blog.title }}</mat-option>
+      <mat-select formControlName="blog">
+        <mat-option *ngFor="let blog of blogs" [value]="blog.title">{{ blog.title }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>

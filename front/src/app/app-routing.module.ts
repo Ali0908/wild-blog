@@ -10,6 +10,7 @@ import {BlogsByAuthorComponent} from "./components/blogs-by-author/blogs-by-auth
 import {FormEditBlogComponent} from "./components/form-edit-blog/form-edit-blog.component";
 import {ArticlesByAuthorComponent} from "./components/articles-by-author/articles-by-author.component";
 import {CommentsByAuthorComponent} from "./components/comments-by-author/comments-by-author.component";
+import {FormEditArticleComponent} from "./components/form-edit-article/form-edit-article.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'editArticleForm/:id',
-    component: FormArticleComponent,
+    component: FormEditArticleComponent,
     canActivate: [authGuard]
   },
   {

@@ -60,12 +60,10 @@ export class FormArticleComponent implements OnInit {
     this.allTokens$.subscribe(  {
       next: (allToken) => {
         this.allTokens = allToken;
-        console.log('allTokens', this.allTokens);
         const tokenStorage = localStorage.getItem('token');
         for (const token of this.allTokens) {
           if (token.token === tokenStorage) {
             this.userId = token.userId;
-            console.log('userId', this.userId);
           }
         }
       },
@@ -109,7 +107,6 @@ export class FormArticleComponent implements OnInit {
   getAllBlogs() {
     this.blogSrv.getAllBlogs().subscribe(res => {
       this.blogs = res;
-      console.log('blogs', this.blogs);
     })
   }
 }

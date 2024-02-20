@@ -40,7 +40,6 @@ export class FormEditBlogComponent implements OnInit {
     this.allTokens$.subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
-        console.log('allTokens', this.allTokens);
         const tokenStorage = localStorage.getItem('token');
         for (const token of this.allTokens) {
           if (token.token === tokenStorage) {
@@ -58,7 +57,6 @@ export class FormEditBlogComponent implements OnInit {
   fetchCategories() {
     this.categoryService.getAllCategories().subscribe((res: CategoryRequest[]) => {
       this.categories = res;
-      console.log('categories', this.categories);
     });
   }
 
@@ -107,10 +105,8 @@ export class FormEditBlogComponent implements OnInit {
     if (this.token && this.userId !== 0) {
       this.blogService.getAllBlogsByUser(this.userId, this.headers).subscribe((data: BlogResponse[]) => {
         this.dataBlogs = data;
-        console.log('dataSource on edit', this.dataBlogs);
         for (const blog of this.dataBlogs) {
           const blogIdToString = blog.id.toString();
-          console.log('blog', blog);
           if (blogIdToString === this.blogId) {
             this.editFormBlog.patchValue({
               blogTitle: blog.title,

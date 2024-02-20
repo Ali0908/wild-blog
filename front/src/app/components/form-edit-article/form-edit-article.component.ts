@@ -37,7 +37,7 @@ export class FormEditArticleComponent implements OnInit {
   editArticleForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
     content: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
-    blogTitle: new FormControl(''),
+    blog: new FormControl(''),
   })
 
   getUser() {
@@ -49,6 +49,7 @@ export class FormEditArticleComponent implements OnInit {
         for (const token of this.allTokens) {
           if (token.token === tokenStorage) {
             this.userId = token.userId;
+            console.log('userId', this.userId);
             this.fetchArticlesById();
           }
         }
@@ -91,7 +92,7 @@ export class FormEditArticleComponent implements OnInit {
             this.editArticleForm.patchValue({
               title: article.title,
               content: article.content,
-              blogTitle: article.blogTitle,
+              blog: article.blogTitle,
             });
             break;
           }
