@@ -1,6 +1,6 @@
 <div class="article-form-global">
   <form class="article-form-container" [formGroup]="editArticleForm" (ngSubmit)="OnUpdatePublishedArticle()">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Saisissez le titre de l'article</mat-label>
       <input matInput formControlName="title" required>
       <mat-error *ngIf="editArticleForm.get('title')?.hasError('required')">Merci un titre pour votre blog</mat-error>
@@ -9,13 +9,13 @@
         titre doit contenir entre 3 et 10 caratères
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label> Sélectionner un blog</mat-label>
       <mat-select formControlName="blog">
         <mat-option *ngFor="let blog of blogs" [value]="blog.title">{{ blog.title }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="content"></textarea>
       <mat-error *ngIf="editArticleForm.get('content')?.hasError('required')">Merci de saisir une description</mat-error>

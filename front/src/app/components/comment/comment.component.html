@@ -1,3 +1,12 @@
 <div class="comment-container"  *ngFor=" let item of commentsByArticleId">
   <p>{{item.content}}</p>
 </div>
+<div class="form-comment" *ngIf="userConnected">
+<form  [formGroup]="commentBlog" (ngSubmit)="OnCreateComment()">
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="input" required>
+    <mat-error *ngIf="commentBlog.get('input')?.hasError('minlength') || commentBlog.get('input')?.hasError('maxlength')"> Le commentaire doit contenir entre 2 et 100 caratères</mat-error>
+  </mat-form-field>
+  <button mat-raised-button  type="submit" class="sendBtn"><mat-icon>send</mat-icon></button>
+</form>
+</div>
