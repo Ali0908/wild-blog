@@ -14,3 +14,6 @@ Les méthodes getUser() et fetchUser() sont similaires il faudrait les factorise
 
 4) ## Fichier concerné: blogs-by-author.component.ts
 Vérification des checkboxes.
+
+5) ## Fichier concerné: article.component.ts
+Au moment du rechargement de cette page les cards ne s'affichent plus.
