@@ -13,7 +13,7 @@ import {CommentService} from "../../services/comment/comment.service";
 })
 export class CommentsByAuthorComponent implements OnInit {
   dataComments: any;
-  headerColumns = ['comments', 'articleTitle'];
+  headerColumns = ['comments', 'articleTitle', 'articleContent', 'update'];
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   token = localStorage.getItem('token');

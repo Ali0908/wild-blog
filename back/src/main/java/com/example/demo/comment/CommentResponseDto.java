@@ -5,7 +5,8 @@ public record CommentResponseDto(
         String content,
         Integer articleId,
         Integer userId,
-        String articleTitle
+        String articleTitle,
+        String articleContent
 
 ) {
 }

@@ -11,6 +11,7 @@ import {FormEditBlogComponent} from "./components/form-edit-blog/form-edit-blog.
 import {ArticlesByAuthorComponent} from "./components/articles-by-author/articles-by-author.component";
 import {CommentsByAuthorComponent} from "./components/comments-by-author/comments-by-author.component";
 import {FormEditArticleComponent} from "./components/form-edit-article/form-edit-article.component";
+import {FormEditCommentComponent} from "./components/form-edit-comment/form-edit-comment.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'editArticleForm/:id',
     component: FormEditArticleComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'editCommentForm/:id',
+    component: FormEditCommentComponent,
     canActivate: [authGuard]
   },
   {

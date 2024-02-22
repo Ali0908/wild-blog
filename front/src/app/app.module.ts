@@ -26,6 +26,7 @@ import {CommentsByAuthorComponent} from './components/comments-by-author/comment
 import {ArticlesByAuthorComponent} from './components/articles-by-author/articles-by-author.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import { FormEditArticleComponent } from './components/form-edit-article/form-edit-article.component';
+import { FormEditCommentComponent } from './components/form-edit-comment/form-edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FormEditArticleComponent } from './components/form-edit-article/form-ed
     CommentsByAuthorComponent,
     ArticlesByAuthorComponent,
     FormEditArticleComponent,
+    FormEditCommentComponent,
   ],
   imports: [
     BrowserModule,

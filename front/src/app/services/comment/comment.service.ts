@@ -23,4 +23,7 @@ export class CommentService {
   getAllCommentsByUser(userId: number, headers: { Authorization: string }): Observable<CommentResponse[]> {
     return this.http.get<CommentResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });
   }
+  updateCommentByUser(commentId: string, userId:number, commentRequest: CommentRequest, headers: { Authorization: string; }) {
+    return this.http.put(`${this.baseUrl}/user/${commentId}/${userId}`, commentRequest, { headers });
+  }
 }

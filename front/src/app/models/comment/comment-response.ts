@@ -3,4 +3,5 @@ export interface CommentResponse {
   content?: string;
   articleTitle?: string;
   userId?: number;
+  articleContent?: string;
 }
