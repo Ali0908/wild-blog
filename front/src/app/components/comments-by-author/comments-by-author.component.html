@@ -1,4 +1,8 @@
 <app-header></app-header>
+<mat-form-field>
+  <mat-label>Filtre</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. tech">
+</mat-form-field>
 <table mat-table [dataSource]="dataComments" class="mat-elevation-z8">
   <!-- Checkbox Column -->
   <ng-container matColumnDef="comments">

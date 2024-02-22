@@ -29,6 +29,10 @@ export class CommentsByAuthorComponent implements OnInit {
     this.getUser();
     this.dataComments = new MatTableDataSource<CommentResponse>();
   }
+  applyFilter(event: Event) {
+    const filterValue: any = (event.target as HTMLInputElement).value;
+    this.dataComments.filter = filterValue.trim().toLowerCase();
+  }
 
   getUser() {
     this.allTokens$.subscribe({
