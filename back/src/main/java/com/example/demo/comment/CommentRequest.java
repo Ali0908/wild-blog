@@ -11,4 +11,5 @@ public class CommentRequest {
     private Integer id;
     private String content;
     Integer articleId;
+
 }

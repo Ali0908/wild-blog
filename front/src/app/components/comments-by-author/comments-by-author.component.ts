@@ -13,7 +13,7 @@ import {CommentService} from "../../services/comment/comment.service";
 })
 export class CommentsByAuthorComponent implements OnInit {
   dataComments: any;
-  headerColumns = ['comments'];
+  headerColumns = ['comments', 'articleTitle'];
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   token = localStorage.getItem('token');
@@ -53,6 +53,7 @@ export class CommentsByAuthorComponent implements OnInit {
   fetchCommentsByAuthor() {
     if (this.token && this.userId !== 0) {
       this.commentService.getAllCommentsByUser(this.userId, this.headers).subscribe((data: any) => {
+        console.log('comments', data);
         this.dataComments = new MatTableDataSource<CommentResponse[]>(data);
       });
     }
