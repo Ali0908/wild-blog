@@ -54,4 +54,9 @@ export class HeaderComponent implements OnInit {
   visibleBlogBtn() {
     return !this.hideBlogBtn && this.userConnected;
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    location.reload();
+  }
 }

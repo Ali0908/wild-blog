@@ -5,12 +5,13 @@
     </a>
   </div>
   <div class="authentication-links">
-    <a routerLink="/blogsByAuthor" class="myBlogs"> Blogs</a>
-    <a routerLink="/articlesByAuthor" class="myBlogs"> Articles</a>
-    <a routerLink="/commentsByAuthor" class="myBlogs"> Comments</a>
+    <a routerLink="/blogsByAuthor" class="myBlogs" *ngIf="userConnected"> Blogs</a>
+    <a routerLink="/articlesByAuthor" class="myBlogs" *ngIf="userConnected"> Articles</a>
+    <a routerLink="/commentsByAuthor" class="myBlogs" *ngIf="userConnected"> Comments</a>
   </div>
   <div class="authentication-buttons">
-    <button mat-raised-button color="warn" (click)="openAuthenticationDialog()">Connexion</button>
+    <button mat-raised-button color="warn" (click)="openAuthenticationDialog()" *ngIf="!userConnected">Connexion</button>
+    <button mat-raised-button color="warn" (click)="logout()" *ngIf="userConnected">Déconnexion</button>
     <button mat-raised-button color="primary" routerLink="/blogForm" *ngIf="visibleBlogBtn()">
       <mat-icon>add_box</mat-icon>
       Blog
