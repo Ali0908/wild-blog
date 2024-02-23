@@ -29,6 +29,7 @@ export class CommentsByAuthorComponent implements OnInit {
     this.getUser();
     this.dataComments = new MatTableDataSource<CommentResponse>();
   }
+
   applyFilter(event: Event) {
     const filterValue: any = (event.target as HTMLInputElement).value;
     this.dataComments.filter = filterValue.trim().toLowerCase();
@@ -63,14 +64,26 @@ export class CommentsByAuthorComponent implements OnInit {
     }
   }
 
-  deleteAllComments(s: string) {
-
+  deleteAllComments(userId: string) {
+    userId = this.userId.toString();
+    this.commentService.deleteAllCommentsByUser(userId, this.headers)
+      .pipe(
+        tap(response => {
+          window.alert('Tous les commentaires ont été supprimés');
+          location.reload();
+        }),
+        catchError(async (error) => {
+          window.alert('Erreur lors de la suppression des commentaires');
+          location.reload();
+        })
+      )
+      .subscribe();
   }
 
   deleteComment(commentId: number) {
     const commentToString = commentId.toString();
     const userToString = this.userId.toString();
-    this.commentService.deleteCommentByUser(commentToString, userToString,this.headers)
+    this.commentService.deleteCommentByUser(commentToString, userToString, this.headers)
       .pipe(
         tap(response => {
           window.alert('Commentaire supprimé');

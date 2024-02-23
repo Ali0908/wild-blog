@@ -29,4 +29,7 @@ export class CommentService {
   deleteCommentByUser(commentId: string, userId: string, headers: { Authorization: string; }) {
     return this.http.delete(`${this.baseUrl}/user/${commentId}/${userId}`, { headers });
   }
+  deleteAllCommentsByUser(userId: string, headers: { Authorization: string; }) {
+    return this.http.delete(`${this.baseUrl}/users/${userId}`, { headers });
+  }
 }
