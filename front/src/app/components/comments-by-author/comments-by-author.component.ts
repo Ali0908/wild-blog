@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {CommentResponse} from "../../models/comment/comment-response";
-import {Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {CommentService} from "../../services/comment/comment.service";
@@ -13,7 +13,7 @@ import {CommentService} from "../../services/comment/comment.service";
 })
 export class CommentsByAuthorComponent implements OnInit {
   dataComments: any;
-  headerColumns = ['comments', 'articleTitle', 'articleContent', 'update'];
+  headerColumns = ['comments', 'articleTitle', 'articleContent', 'update', 'delete'];
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   token = localStorage.getItem('token');
@@ -61,5 +61,26 @@ export class CommentsByAuthorComponent implements OnInit {
         this.dataComments = new MatTableDataSource<CommentResponse[]>(data);
       });
     }
+  }
+
+  deleteAllComments(s: string) {
+
+  }
+
+  deleteComment(commentId: number) {
+    const commentToString = commentId.toString();
+    const userToString = this.userId.toString();
+    this.commentService.deleteCommentByUser(commentToString, userToString,this.headers)
+      .pipe(
+        tap(response => {
+          window.alert('Commentaire supprimé');
+          location.reload();
+        }),
+        catchError(async (error) => {
+          window.alert('Erreur lors de la suppression du blog');
+          location.reload();
+        })
+      )
+      .subscribe();
   }
 }

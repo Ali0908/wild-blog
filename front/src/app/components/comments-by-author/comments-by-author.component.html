@@ -23,6 +23,12 @@
       <a routerLink="/editCommentForm/{{item.id}}"><mat-icon>edit</mat-icon></a>
     </td>
   </ng-container>
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef (click)="deleteAllComments('')"><mat-icon>delete_forever</mat-icon></th>
+    <td mat-cell *matCellDef="let item" class="actions-links" (click)="deleteComment(item.id)">
+      <mat-icon class="icon-delete">delete</mat-icon>
+    </td>
+  </ng-container>
   <tr mat-header-row *matHeaderRowDef="headerColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: headerColumns;"></tr>
 </table>

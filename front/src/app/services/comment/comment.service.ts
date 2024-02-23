@@ -26,4 +26,7 @@ export class CommentService {
   updateCommentByUser(commentId: string, userId:number, commentRequest: CommentRequest, headers: { Authorization: string; }) {
     return this.http.put(`${this.baseUrl}/user/${commentId}/${userId}`, commentRequest, { headers });
   }
+  deleteCommentByUser(commentId: string, userId: string, headers: { Authorization: string; }) {
+    return this.http.delete(`${this.baseUrl}/user/${commentId}/${userId}`, { headers });
+  }
 }
