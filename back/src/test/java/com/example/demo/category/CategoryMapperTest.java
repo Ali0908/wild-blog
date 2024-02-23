@@ -22,4 +22,9 @@ class CategoryMapperTest {
         assertNotNull(category.getName());
         assertEquals(categoryDto.name(), category.getName());
     }
+    @Test
+    void toCategory_when_categoryDto_is_null() {
+        var exp = assertThrows(NullPointerException.class, () -> categoryMapper.toCategory(null));
+        assertEquals("CategoryDto should not be null.", exp.getMessage());
+    }
 }
