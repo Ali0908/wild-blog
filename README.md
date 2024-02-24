@@ -17,3 +17,6 @@ Vérification des checkboxes.
 
 5) ## Fichier concerné: article.component.ts
 Au moment du rechargement de cette page les cards ne s'affichent plus.
+
+6) ## Fichier concerné: authentication.component.ts
+J'ai un souci avec la méthode window.alert: TS2339: Property alert does not exist on type

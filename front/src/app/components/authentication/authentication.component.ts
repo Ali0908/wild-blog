@@ -51,12 +51,11 @@ export class AuthenticationComponent implements OnInit{
       };
       this.authenticationService.register(user)
         .pipe(
-          tap(response => {
-            console.log('User created successfully!', response);
-            // @ts-ignore
-            window.alert('Utilisateur crée');
+          tap(response  => {
+             console.log('User created successfully!', response);
             this.register = false;
             this.login = true;
+          //   window.alert('Utilisateur créé avec succès');
           }),
           catchError(async (error) => console.error('Error creating user', error))
         )
