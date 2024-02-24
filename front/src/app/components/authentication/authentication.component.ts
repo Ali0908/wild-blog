@@ -45,7 +45,7 @@ export class AuthenticationComponent implements OnInit{
   onSubmit() {
     if (this.form.controls.userName.status && this.form.controls.email.status && this.form.controls.password.status && this.form.controls.confirmPassword.status === "VALID") {
       const user: RegisterRequest = {
-        userName: this.form.value.userName,
+        username: this.form.value.userName,
         email: this.form.value.email,
         password: this.form.value.password,
       };
