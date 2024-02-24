@@ -16,6 +16,14 @@ public class CategoryController {
     public List<CategoryResponseDto> getAllCategories() {
         return categoryService.getAllCategories();
     }
+    @GetMapping("/{id}")
+    public CategoryResponseDto CategoryBlogById(@PathVariable("id") Integer id) {
+        return categoryService.getCategoryById(id);
+    }
+    @GetMapping({"/{name}"})
+    public List<CategoryResponseDto> getAllCategoriesByName(@PathVariable("name") String name) {
+        return categoryService.getCategoriesByName(name);
+    }
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     public ResponseEntity<CategoryResponseDto> create(
