@@ -8,6 +8,7 @@ public record ArticleResponseDto(
         Boolean isSaved,
         String blogTitle,
         Integer blogId,
-        Integer userId
+        Integer userId,
+        String username
 ) {
 }

@@ -29,7 +29,8 @@ public class ArticleMapper {
                 article.isSaved(),
                 article.getBlog().getTitle(),
                 article.getBlog().getId(),
-                article.getUser().getId()
+                article.getUser().getId(),
+                article.getUser().getEmail()
         );
     }
 }

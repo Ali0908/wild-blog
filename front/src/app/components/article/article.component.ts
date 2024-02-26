@@ -10,11 +10,10 @@ import {CommentComponent} from "../comment/comment.component";
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-  allArticles: any = [];
   articlesByBlogId: any = [];
   clickedBlogId: any;
   hideArticleBtn = true;
-
+  usersAvatar: any= {};
   constructor(private articleSrv: ArticleService, private sharedSrv: SharedService, public dialog: MatDialog) {
 
     this.sharedSrv.clickedBlogId$.subscribe({
@@ -33,18 +32,12 @@ export class ArticleComponent implements OnInit {
        this.sharedSrv.getHideArticleBtn(this.hideArticleBtn);
     }
 
-  fetchArticles() {
-    this.articleSrv.getAllArticles().subscribe((response) => {
-      this.allArticles = response;
-      // console.log(' Tous les articles', this.allArticles);
-    });
-  }
-
   fetchArticlesByBlogId() {
     this.articleSrv.getArticlesByBlogId(this.clickedBlogId).subscribe({
         next: (response) => {
           this.articlesByBlogId = response;
           console.log('Articles par blog', this.articlesByBlogId);
+          this.generateRandomAvatars(this.articlesByBlogId);
         },
         error: (err) => {
           console.log(err);
@@ -59,4 +52,16 @@ export class ArticleComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
 
   }
+
+  generateRandomAvatars = (articles: any) => {
+    for (const article of articles) {
+      const userId = article.username; // Ou toute autre propriété unique de l'utilisateur
+      if (!this.usersAvatar[userId]) {
+        const randomNumber = Math.floor(Math.random() * 1000);
+        this.usersAvatar[userId] = `https://api.dicebear.com/7.x/open-peeps/svg?seed=${randomNumber}`;
+      }
+    }
+  };
+
+
 }
