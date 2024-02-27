@@ -17,8 +17,8 @@ export class BlogService {
 
     return this.http.post(`${this.baseUrl}/create`, blogRequest, { headers });
   }
-  getAllBlogs(){
-    return this.http.get(`${this.baseUrl}`);
+  getAllBlogs(): Observable<BlogResponse[]> {
+    return this.http.get<BlogResponse[]>(`${this.baseUrl}`);
   }
   getAllBlogsByUser(userId:number, headers: { Authorization: string; }): Observable<BlogResponse[]>{
     return this.http.get<BlogResponse[]>(`${this.baseUrl}/user/${userId}`, { headers });

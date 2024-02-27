@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BlogService} from "../../services/blog/blog.service";
 import {Router} from "@angular/router";
 import {SharedService} from "../../services/shared.service";
+import {BlogResponse} from "../../models/blog/blog-response";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  allBlogs: any = [];
+  allBlogs: BlogResponse[] = [];
   clickedBlogId: any;
 
   ngOnInit(): void {

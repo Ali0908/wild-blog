@@ -7,6 +7,7 @@ import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
 import {Router} from "@angular/router";
 import {CommentRequest} from "../../models/comment/comment-request";
+import {CommentResponse} from "../../models/comment/comment-response";
 
 @Component({
   selector: 'app-comment',
@@ -14,14 +15,14 @@ import {CommentRequest} from "../../models/comment/comment-request";
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
- commentsByArticleId: any = [];
-  clickedArticleId: any;
+ commentsByArticleId: CommentResponse[] = [];
+  clickedArticleId: number = 0;
   userId: number = 0;
   allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
   allTokens: any = [];
   userConnected = false;
   commentBlog = new FormGroup({
-    input: new FormControl('', [ Validators.minLength(2), Validators.maxLength(100)])
+    input: new FormControl('', [ Validators.minLength(2), Validators.maxLength(200)])
   })
 
   constructor( private commentSrv: CommentService, private sharedSrv: SharedService,

@@ -11,10 +11,10 @@ export class CommentService {
 
   private baseUrl = 'http://localhost:8080/api/v1/comment';
   constructor(private http: HttpClient) { }
-  getCommentsByArticlesId(articleId: any) {
-    return this.http.get(`${this.baseUrl}/article/${articleId}`);
+  getCommentsByArticlesId(articleId: number): Observable<CommentResponse[]> {
+    return this.http.get<CommentResponse[]>(`${this.baseUrl}/article/${articleId}`);
   }
-  create(commentRequest: CommentRequest, headers: { Authorization: string; } ){
+  create(commentRequest: CommentRequest, headers: { Authorization: string; } ): Observable<CommentRequest>{
     const token = localStorage.getItem('token');
     headers.Authorization = `Bearer ${token}`;
     return this.http.post(`${this.baseUrl}/create`, commentRequest, { headers });
