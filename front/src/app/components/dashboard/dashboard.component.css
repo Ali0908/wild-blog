@@ -1,0 +1,37 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: white;
+  font-family: 'Karma', sans-serif;
+  .dashboard-title{
+    text-decoration: underline #fff;
+  }
+}
+
+.blog-list {
+  width: 20%;
+  .card {
+    margin-top: 10%;
+
+    .card-content {
+      display: flex;
+      justify-content: space-between;
+      color: black;
+      margin-top: 2%;
+    }
+
+    .blog-category {
+      font-size: 12px;
+      font-style: italic;
+      color: #3f51b5;
+    }
+  }
+  .card:hover {
+    cursor: pointer;
+  }
+}
+
+

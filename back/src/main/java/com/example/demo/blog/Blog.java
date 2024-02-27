@@ -1,9 +1,14 @@
 package com.example.demo.blog;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.example.demo.article.Article;
+import com.example.demo.category.Category;
+import com.example.demo.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -14,8 +19,22 @@ import lombok.*;
 @Entity
 public class Blog {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String title;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable=false)
+    @JsonBackReference
+    private Category category;
+
+    @OneToMany(mappedBy = "blog")
+    @JsonManagedReference
+    private List<Article> articles;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable=false)
+    @JsonBackReference
+    private User user;
 
 }

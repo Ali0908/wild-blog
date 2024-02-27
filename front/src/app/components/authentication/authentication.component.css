@@ -5,3 +5,14 @@
     display: flex;
     flex-direction: column;
 }
+
+.login-form-container{
+  margin: 3%;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+}
+.login-form-title{
+  text-align: center;
+}
