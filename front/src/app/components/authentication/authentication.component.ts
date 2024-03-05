@@ -35,7 +35,8 @@ export class AuthenticationComponent implements OnInit{
   form = new FormGroup({
       userName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password :  new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern(/^(?=.*[A-Z]).*(?=.*[a-z]).*(?=.*[!@#$%^&*()_+\-=\[\]{};',.:\/?]).{10,}$/)]),
+      password :  new FormControl('', [Validators.required,
+        Validators.minLength(10), Validators.pattern(/^(?=.*[A-Z]).*(?=.*[a-z]).*(?=.*[!@#$%^&*()_+\-=\[\]{};',.:\/?]).{10,}$/)]),
       confirmPassword: new FormControl('', [Validators.required]),
     }, {validators: confirmPasswordValidator});
   loginForm = new FormGroup({
@@ -43,7 +44,8 @@ export class AuthenticationComponent implements OnInit{
     passwordLogin: new FormControl('', [Validators.required]),
   });
   onSubmit() {
-    if (this.form.controls.userName.status && this.form.controls.email.status && this.form.controls.password.status && this.form.controls.confirmPassword.status === "VALID") {
+    if (this.form.controls.userName.status && this.form.controls.email.status
+      && this.form.controls.password.status && this.form.controls.confirmPassword.status === "VALID") {
       const user: RegisterRequest = {
         username: this.form.value.userName,
         email: this.form.value.email,

@@ -14,8 +14,7 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class BlogsByAuthorComponent implements OnInit {
   dataBlogs = [];
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   userId: number = 0;
   headerColumns = ['select', 'title', 'categoryName', 'update', 'delete'];
   selection = new SelectionModel<BlogResponse>(true, []);
@@ -34,7 +33,7 @@ export class BlogsByAuthorComponent implements OnInit {
   }
 
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);

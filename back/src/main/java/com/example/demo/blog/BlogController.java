@@ -63,6 +63,7 @@ public class BlogController {
 
 
     @DeleteMapping("user/blogs/{user-id}")
+    // Mise en place de la sécurité pour les utilisateurs et les administrateurs
     @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAllBlogsByUserId(@PathVariable("user-id") Integer userId) {

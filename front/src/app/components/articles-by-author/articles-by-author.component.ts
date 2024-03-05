@@ -11,8 +11,7 @@ import {ArticleResponse} from "../../models/article/article-response";
   styleUrls: ['./articles-by-author.component.css']
 })
 export class ArticlesByAuthorComponent implements OnInit {
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   token = localStorage.getItem('token');
   userId: number = 0;
   headers = {
@@ -29,7 +28,7 @@ export class ArticlesByAuthorComponent implements OnInit {
         this.fetchArticlesByAuthor();
     }
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);
