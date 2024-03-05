@@ -5,5 +5,6 @@ export interface ArticleResponse {
   content: string;
   title: string;
   isSaved: boolean;
-  username?: string;
+  username: string;
+  userAvatar?: string;
 }
