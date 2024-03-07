@@ -29,16 +29,26 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
+        // Création d'un utilisateur
         var user = User.builder()
+                //  Conversion du nom d'utilisateur en minuscules
                 .username(request.getUsername())
+                // Conversion de l'email en minuscules
                 .email(request.getEmail())
+                // Encodage du mot de passe
                 .password(passwordEncoder.encode(request.getPassword()))
+                // Rôle par défaut
                 .role(Role.USER)
                 .build();
+        // Enregistrement de l'utilisateur en base de données
         var savedUser = repository.save(user);
+        // Génération du jeton d'accès
         var jwtToken = jwtService.generateToken(user);
+        // Génération du jeton de rafraîchissement
         var refreshToken = jwtService.generateRefreshToken(user);
+        // Sauvegarde du jeton d'accès pour l'utilisateur (implémentation non fournie)
         saveUserToken(savedUser, jwtToken);
+        // Construction de la réponse d'authentification
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)

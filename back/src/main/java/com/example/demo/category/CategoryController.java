@@ -25,7 +25,7 @@ public class CategoryController {
         return categoryService.getCategoriesByName(name);
     }
     @PostMapping("/create")
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<CategoryResponseDto> create(
             @RequestBody CategoryDto categoryDto) {
          return  ResponseEntity.ok(categoryService.create(categoryDto));

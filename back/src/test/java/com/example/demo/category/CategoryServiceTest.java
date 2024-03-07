@@ -15,39 +15,46 @@ import static org.mockito.Mockito.*;
 
 class CategoryServiceTest {
     // Service tested:
+    // The @InjectMocks est utilisée pour injecter des dépendances dans le champ de test.
     @InjectMocks
     private CategoryService categoryService;
 
-    // Dependencies:
+    // Dépendances du service:
     @Mock
     private CategoryRepository categoryRepository;
     @Mock
     private CategoryMapper categoryMapper;
 
+    // Annotation @BeforeEach est utilisée pour marquer une méthode pour qu'elle soit exécutée avant chaque méthode de test.
     @BeforeEach
+    // Initialisation des objets annotés par @Mock
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
     void createCategory() {
-        // Given
+        // Créer un objet CategoryDto avec les valeurs 1 et "category"
         CategoryDto categoryDto = new CategoryDto(1, "category");
+        // Créer un objet Category avec les valeurs 1 et "category"
         Category category = new Category(1, "category", null);
+        // Créer un objet Category avec les valeurs 1 et "category"
         Category savedCategory = new Category(1, "category", null);
+        // Définir l'ID de l'objet savedCategory à 1
         savedCategory.setId(1);
 
-        // Mocking
+        // Mocker les méthodes
         when(categoryMapper.toCategory(categoryDto)).thenReturn(category);
         when(categoryRepository.save(category)).thenReturn(savedCategory);
         when(categoryMapper.toCategoryResponseDto(savedCategory)).thenReturn(new CategoryResponseDto(1, "category"));
-        // When
+        // Appeler la méthode create de l'objet categoryService
         CategoryResponseDto categoryResponseDto = categoryService.create(categoryDto);
-        // Then
+        // Vérifier si l'objet categoryDto.id() est égal à l'objet categoryResponseDto.id()
         assertEquals(categoryDto.id(), categoryResponseDto.id());
+        // Vérifier si l'objet categoryDto.name() est égal à l'objet categoryResponseDto.name()
         assertEquals(categoryDto.name(), categoryResponseDto.name());
 
-        // Verify if the method was called only once
+        // Verifier si la méthode toCategory de l'objet categoryMapper a été appelée une seule fois
         verify(categoryMapper, times(1)).toCategory(categoryDto);
         verify(categoryRepository, times(1)).save(category);
         verify(categoryMapper, times(1)).toCategoryResponseDto(savedCategory);

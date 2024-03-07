@@ -30,8 +30,7 @@ import {CommentRequest} from "../../models/comment/comment-request";
 export class FormEditCommentComponent implements OnInit {
   commentsByArticleId: any = [];
   userId: number = 0;
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   token = localStorage.getItem('token');
   headers = {
     Authorization: `Bearer ${this.token}`
@@ -51,7 +50,7 @@ export class FormEditCommentComponent implements OnInit {
   }
 
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);

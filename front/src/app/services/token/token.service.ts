@@ -10,7 +10,7 @@ export class TokenService {
   private baseUrl = 'http://localhost:8080/api/v1/token';
   constructor(private http: HttpClient) { }
 
-  getAllTokens(): Observable<TokenResponse>{
-    return this.http.get<TokenResponse>(`${this.baseUrl}`);
+  getAllTokens(): Observable<TokenResponse[]>{
+    return this.http.get<TokenResponse[]>(`${this.baseUrl}`);
   }
 }

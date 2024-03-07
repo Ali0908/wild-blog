@@ -14,8 +14,7 @@ import {CommentService} from "../../services/comment/comment.service";
 export class CommentsByAuthorComponent implements OnInit {
   dataComments: any;
   headerColumns = ['comments', 'articleTitle', 'articleContent', 'update', 'delete'];
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   token = localStorage.getItem('token');
   userId: number = 0;
   headers = {
@@ -36,7 +35,7 @@ export class CommentsByAuthorComponent implements OnInit {
   }
 
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);

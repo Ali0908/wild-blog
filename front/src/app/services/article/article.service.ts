@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ArticleResponse} from "../../models/article/article-response";
 import {ArticleRequest} from "../../models/article/article-request";
+import {environment} from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ArticleService {
     return this.http.get<ArticleResponse>(`${this.baseUrl}`);
   }
   getArticlesByBlogId(blogId: any) {
-    return this.http.get(`${this.baseUrl}/blog/${blogId}`);
+    return this.http.get(`${environment.apiUrl}/article/blog/${blogId}`);
   }
   createArticle(articleRequest: ArticleRequest, headers: { Authorization: string; }) {
     const token = localStorage.getItem('token');

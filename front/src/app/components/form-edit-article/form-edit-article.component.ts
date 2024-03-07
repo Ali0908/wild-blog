@@ -16,8 +16,7 @@ import {ArticleRequest} from "../../models/article/article-request";
 })
 export class FormEditArticleComponent implements OnInit {
   blogs: any = [];
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   userId: number = 0;
   articleId: string = '';
   token = localStorage.getItem('token');
@@ -42,7 +41,7 @@ export class FormEditArticleComponent implements OnInit {
   })
 
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);

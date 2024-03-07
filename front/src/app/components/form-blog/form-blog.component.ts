@@ -7,7 +7,6 @@ import {CategoryService} from "../../services/category/category.service";
 import {Router} from "@angular/router";
 import {TokenService} from "../../services/token/token.service";
 import {TokenResponse} from "../../models/token/token-response";
-import {SharedService} from "../../services/shared.service";
 import {CategoryRequest} from "../../models/category/categoryRequest";
 
 @Component({
@@ -17,8 +16,7 @@ import {CategoryRequest} from "../../models/category/categoryRequest";
 })
 export class FormBlogComponent implements OnInit {
   categories: CategoryRequest[] = [];
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   userId: number = 0;
 
   constructor(private blogService: BlogService, private categoryService: CategoryService,
@@ -44,7 +42,7 @@ export class FormBlogComponent implements OnInit {
   }
 
   getUser() {
-    this.allTokens$.subscribe(  {
+    this.tokenService.getAllTokens().subscribe(  {
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);
