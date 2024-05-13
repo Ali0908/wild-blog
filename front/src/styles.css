@@ -15,6 +15,7 @@ html, body {
   }
 
   .form-blog-container {
+    padding: 1%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +47,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+
     .article-form-container {
+      padding: 1%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,9 +63,8 @@ html, body {
         justify-content: space-between;
       }
     }
-
+    .mdc-tab__text-label {
+      color: white!important;
+    }
   }
-
-
-
 }

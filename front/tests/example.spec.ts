@@ -1,17 +1,18 @@
-import {test, expect, request} from '@playwright/test';
+import {test} from '@playwright/test';
 import {AuthenticationRequest} from "../src/app/models/auth/authentication-request";
 import {environment} from "../src/environments/environment.development";
 
+// Test vérifiant que l'on peut se connecter avec des identifiants valides
 test("Able to login with valid credentials", async ({ request }) => {
-  const baseUrl = 'http://localhost:8080/api/v1/auth/authenticate';
+  // On crée un objet de type AuthenticationRequest avec les identifiants de l'utilisateur
   const authRequestTest: AuthenticationRequest = {
     email: environment.userEmail,
     password: environment.userPassword
   }
-  await request.post(`${baseUrl}`, {
+  // On envoie une requête POST à l'API pour se connecter
+  await request.post(`${environment.apiUrl}/authenticate`, {
     data: authRequestTest,
   });
-  // expect(Response.status()).toBe(200);
 });
 
 // test('get started link', async ({ page }) => {
