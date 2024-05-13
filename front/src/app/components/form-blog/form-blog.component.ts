@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from '../../services/blog/blog.service';
-import {catchError, Observable, tap} from "rxjs";
+import {catchError, tap} from "rxjs";
 import {BlogRequest} from "../../models/blog/blog-request";
 import {CategoryService} from "../../services/category/category.service";
 import {Router} from "@angular/router";
@@ -42,7 +42,7 @@ export class FormBlogComponent implements OnInit {
   }
 
   getUser() {
-    this.tokenService.getAllTokens().subscribe(  {
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);
@@ -54,34 +54,33 @@ export class FormBlogComponent implements OnInit {
           }
         }
       },
-        error: (err) => {
+      error: (err) => {
         console.log(err);
       }
     });
   }
 
-OnCreateBlog()
-{
-  const token = localStorage.getItem('token');
-  const headers = {
-    Authorization: `Bearer ${token}`
-  };
-  const blog: BlogRequest = {
-    title: this.formBlog.value.blogTitle,
-    categoryId: this.formBlog.value.categories,
-    userId: this.userId
+  OnCreateBlog() {
+    const token = localStorage.getItem('token');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    const blog: BlogRequest = {
+      title: this.formBlog.value.blogTitle,
+      categoryId: this.formBlog.value.categories,
+      userId: this.userId
+    }
+    this.blogService.createBlog(blog, headers)
+      .pipe(
+        tap(response => {
+          console.log('Blog créé', response);
+          window.alert('Blog créé');
+          this.router.navigate(['dashboard']);
+        }),
+        catchError(async (error) => {
+          console.error('Error connected user', error);
+        })
+      )
+      .subscribe();
   }
-  this.blogService.createBlog(blog, headers)
-    .pipe(
-      tap(response => {
-        console.log('Blog créé', response);
-        window.alert('Blog créé');
-        this.router.navigate(['dashboard']);
-      }),
-      catchError(async (error) => {
-        console.error('Error connected user', error);
-      })
-    )
-    .subscribe();
-}
 }

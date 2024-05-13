@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from "../../services/blog/blog.service";
 import {ArticleRequest} from "../../models/article/article-request";
 import {ArticleService} from "../../services/article/article.service";
-import {catchError, Observable, tap} from "rxjs";
+import {catchError, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
@@ -24,7 +24,7 @@ export class FormArticleComponent implements OnInit {
   }
 
   articleForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
     content: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]),
     blogId: new FormControl(null),
   })
@@ -45,7 +45,7 @@ export class FormArticleComponent implements OnInit {
       .pipe(
         tap(response => {
           console.log('Article créé', response);
-          window.alert('Article créé');
+          // window.alert('Article créé');
           this.router.navigate(['dashboard']);
         }),
         catchError(async (error) => {
