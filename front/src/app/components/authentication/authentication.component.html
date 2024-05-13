@@ -1,34 +1,62 @@
-<div class="signup-form-container">
-    <form [formGroup]="form" class="signup-form"  (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput placeholder="PaulB" formControlName="userName" required>
-            <mat-error *ngIf="form.get('userName')?.hasError('required')">Merci de saisir un nom d'utilisateur</mat-error>
-            <mat-error *ngIf="form.get('userName')?.hasError('minlength') || form.get('userName')?.hasError('maxlength')">Le nom d'utilisateur doit être compris entre 3 et 10 caratères</mat-error>
-            </mat-form-field>
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="pat@example.com" formControlName="email" required>
-            <mat-error *ngIf="form.get('email')?.hasError('required')">Merci de saisir une adresse mail</mat-error>
-            </mat-form-field>
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Mot de passe</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required placeholder="Motdepasse9!">
-            <mat-error *ngIf="form.get('password')?.hasError('required')">Merci de saisir un mot de passe</mat-error>
-            <mat-error *ngIf="form.get('password')?.hasError('minlength') || form.get('password')?.hasError('pattern')">Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial</mat-error>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Confirmation du mot de passe</mat-label>
-            <input matInput formControlName="confirmPassword" name="confirmPassword" [type]="hide ? 'password' : 'text'" required pattern="{{form.value.password}}" placeholder="Motdepasse9!">
-            <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Merci de ressaisir un mot de passe</mat-error>
-            <mat-error *ngIf="form.value.confirmPassword">Les mots de passe ne correspondent pas</mat-error>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Valider</button>
-    </form>
+<div class="login-form-container" *ngIf="login">
+  <h2 class="login-form-title">Connexion</h2>
+  <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="emailLogin" required>
+      <mat-error *ngIf="loginForm.get('emailLogin')?.hasError('required')">Merci de saisir un nom d'utilisateur</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="hideLogin ? 'password' : 'text'" formControlName="passwordLogin" required placeholder="Motdepasse9!">
+      <mat-error *ngIf="loginForm.get('passwordLogin')?.hasError('required')">Merci de saisir un mot de passe</mat-error>
+      <button mat-icon-button matSuffix (click)="hideLogin = !hideLogin" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideLogin">
+        <mat-icon>{{hideLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Valider</button>
+  </form>
+</div>
+<div *ngIf="login">
+  <p class="login-form-text">Pas encore de compte ? <a routerLink="/register" class="register-button" (click)="handleFomRenderer()">Inscrivez-vous</a></p>
+</div>
+
+<div class="signup-form-container" *ngIf="register">
+  <form [formGroup]="form" class="signup-form"  (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="signup-form-field">
+      <mat-label>Nom d'utilisateur</mat-label>
+      <input matInput placeholder="PaulB" formControlName="userName" required>
+      <mat-error *ngIf="form.get('userName')?.hasError('required')">Merci de saisir un nom d'utilisateur</mat-error>
+      <mat-error *ngIf="form.get('userName')?.hasError('minlength') ||
+       form.get('userName')?.hasError('maxlength')">Le nom d'utilisateur doit être compris entre 3 et 10 caratères</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="signup-form-field">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="pat@example.com" formControlName="email" required>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Merci de saisir une adresse mail</mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">Merci de saisir une adresse mail au format:pat@example.com </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="signup-form-field">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required placeholder="Motdepasse9!">
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Merci de saisir un mot de passe</mat-error>
+      <mat-error class="error-length" *ngIf="form.get('password')?.hasError('minlength') ||
+       form.get('password')?.hasError('pattern')">
+        Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule et un caractère spécial</mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="signup-form-field">
+      <mat-label>Confirmation du mot de passe</mat-label>
+      <input matInput formControlName="confirmPassword" name="confirmPassword"
+             [type]="hide ? 'password' : 'text'" required pattern="{{form.value.password}}" placeholder="Motdepasse9!">
+      <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Merci de ressaisir un mot de passe</mat-error>
+      <mat-error *ngIf="form.value.confirmPassword">Les mots de passe ne correspondent pas</mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Valider</button>
+  </form>
 </div>

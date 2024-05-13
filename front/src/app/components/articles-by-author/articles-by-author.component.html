@@ -1,0 +1,75 @@
+<app-header></app-header>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">publish</mat-icon>
+      Articles publiés
+    </ng-template>
+    <div class="article-container">
+      <mat-card class="card" *ngFor="let item of articlesPublished">
+        <mat-card-header class="mat-card-header">
+          <div mat-card-avatar>
+            <img src="{{ usersAvatar[item.username]}}" alt="avatar">
+          </div>
+          <mat-card-title>{{item.username | slice:0:2}}</mat-card-title>
+          <mat-card-subtitle>{{ item.title }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>{{ item.content }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>
+            <mat-icon>thumb_up</mat-icon>
+          </button>
+          <a routerLink="/editArticleForm/{{item.id}}">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <button mat-button (click)="deleteArticle(item.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-button (click)="deleteAllArticles('')">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">save</mat-icon>
+      Articles sauvegardés
+    </ng-template>
+    <div class="article-container">
+      <mat-card class="card" *ngFor="let item of articlesSaved">
+        <mat-card-header class="mat-card-header">
+          <div mat-card-avatar>
+            <img src="{{ usersAvatar[item.username]}}" alt="avatar">
+          </div>
+          <mat-card-title>{{item.username | slice:0:2}}</mat-card-title>
+          <mat-card-subtitle>{{ item.title }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>{{ item.content }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>
+            <mat-icon>thumb_up</mat-icon>
+          </button>
+          <a routerLink="/editArticleForm/{{item.id}}">
+            <mat-icon>edit</mat-icon>
+          </a>
+          <button mat-button (click)="deleteArticle(item.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-button (click)="deleteAllArticles('')">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
