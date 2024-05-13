@@ -7,6 +7,7 @@ import {catchError, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {TokenResponse} from "../../models/token/token-response";
 import {TokenService} from "../../services/token/token.service";
+import {BlogResponse} from "../../models/blog/blog-response";
 
 @Component({
   selector: 'app-form-article',
@@ -14,9 +15,8 @@ import {TokenService} from "../../services/token/token.service";
   styleUrls: ['./form-article.component.css']
 })
 export class FormArticleComponent implements OnInit {
-  blogs: any = [];
-  allTokens$: Observable<TokenResponse> = this.tokenSrv.getAllTokens();
-  allTokens: any = [];
+  blogs: BlogResponse[] = [];
+  allTokens: TokenResponse[] = [];
   userId: number = 0;
 
   constructor(private articleSrv: ArticleService, private blogSrv: BlogService, private router: Router,
@@ -57,7 +57,7 @@ export class FormArticleComponent implements OnInit {
 
 
   fetchUser() {
-    this.allTokens$.subscribe(  {
+    this.tokenSrv.getAllTokens().subscribe(  {
       next: (allToken) => {
         this.allTokens = allToken;
         const tokenStorage = localStorage.getItem('token');

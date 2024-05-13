@@ -20,8 +20,7 @@ export class FormEditBlogComponent implements OnInit {
     blogTitle: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
     categories: new FormControl(''),
   });
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   userId: number = 0;
   blogId: string = '';
   dataBlogs: BlogResponse[] = [];
@@ -37,7 +36,7 @@ export class FormEditBlogComponent implements OnInit {
   }
 
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         const tokenStorage = localStorage.getItem('token');

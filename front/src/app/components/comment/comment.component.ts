@@ -18,8 +18,7 @@ export class CommentComponent implements OnInit {
  commentsByArticleId: CommentResponse[] = [];
   clickedArticleId: number = 0;
   userId: number = 0;
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   userConnected = false;
   commentBlog = new FormGroup({
     input: new FormControl('', [ Validators.minLength(2), Validators.maxLength(200)])
@@ -43,7 +42,7 @@ export class CommentComponent implements OnInit {
     this.getUser();
     }
   getUser() {
-    this.allTokens$.subscribe(  {
+    this.tokenService.getAllTokens().subscribe(  {
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);

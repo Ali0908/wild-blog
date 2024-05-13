@@ -11,8 +11,7 @@ import {ArticleResponse} from "../../models/article/article-response";
   styleUrls: ['./articles-by-author.component.css']
 })
 export class ArticlesByAuthorComponent implements OnInit {
-  allTokens$: Observable<TokenResponse> = this.tokenService.getAllTokens();
-  allTokens: any = [];
+  allTokens: TokenResponse[] = [];
   token = localStorage.getItem('token');
   userId: number = 0;
   headers = {
@@ -20,16 +19,19 @@ export class ArticlesByAuthorComponent implements OnInit {
   };
   articlesPublished: ArticleResponse[] = [];
   allArticles: ArticleResponse[] = [];
-  articlesSaved: ArticleResponse[]= [];
-  constructor( private tokenService: TokenService, private articleService: ArticleService) {
+  articlesSaved: ArticleResponse[] = [];
+  usersAvatar: any = {};
+
+  constructor(private tokenService: TokenService, private articleService: ArticleService) {
   }
 
   ngOnInit(): void {
-        this.getUser();
-        this.fetchArticlesByAuthor();
-    }
+    this.getUser();
+    this.fetchArticlesByAuthor();
+  }
+
   getUser() {
-    this.allTokens$.subscribe({
+    this.tokenService.getAllTokens().subscribe({
       next: (allToken) => {
         this.allTokens = allToken;
         console.log('allTokens', this.allTokens);
@@ -48,10 +50,11 @@ export class ArticlesByAuthorComponent implements OnInit {
     });
   }
 
-   fetchArticlesByAuthor() {
+  fetchArticlesByAuthor() {
     if (this.token && this.userId !== 0) {
       this.articleService.getAllArticlesByUser(this.userId, this.headers).subscribe((data) => {
         this.allArticles = data;
+        this.generateRandomAvatars(this.allArticles);
         this.articlesPublished = this.allArticles.filter((article) => article.isSaved === false);
         this.articlesSaved = this.allArticles.filter((article) => article.isSaved === true);
       });
@@ -63,17 +66,17 @@ export class ArticlesByAuthorComponent implements OnInit {
     const userToString = this.userId.toString();
     this.articleService.deleteArticleByUser(articleIdString, userToString, this.headers)
       .pipe(
-      tap(response => {
-        // console.log('Blog créé', response);
-        window.alert('Article supprimé');
-        location.reload();
-      }),
-      catchError(async (error) => {
-        // console.error('Error connected user', error);
-        window.alert('Erreur lors de la suppression de l\'article');
-        location.reload();
-      })
-    )
+        tap(response => {
+          // console.log('Blog créé', response);
+          window.alert('Article supprimé');
+          location.reload();
+        }),
+        catchError(async (error) => {
+          // console.error('Error connected user', error);
+          window.alert('Erreur lors de la suppression de l\'article');
+          location.reload();
+        })
+      )
       .subscribe();
 
   }
@@ -95,5 +98,16 @@ export class ArticlesByAuthorComponent implements OnInit {
       )
       .subscribe();
 
+  }
+
+  generateRandomAvatars = (articles: ArticleResponse[]) => {
+    for (const article of articles) {
+      const userId = article.username; // Ou toute autre propriété unique de l'utilisateur
+      if (!this.usersAvatar[userId]) {
+        const randomNumber = Math.floor(Math.random() * 1000);
+        this.usersAvatar[userId] = `https://api.dicebear.com/7.x/open-peeps/svg?seed=${randomNumber}`;
+      }
+    }
+    ;
   }
 }
